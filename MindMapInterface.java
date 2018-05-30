@@ -1,10 +1,14 @@
 package userInteface;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+
 import javax.swing.*;
+
 
 
 public class MindMapInterface extends JFrame{
@@ -15,11 +19,35 @@ public class MindMapInterface extends JFrame{
 	private ImageIcon applyToolImage = new ImageIcon("ToolBarIcon\\applyIcon.jpg");
 	private ImageIcon changeToolImage = new ImageIcon("ToolBarIcon\\changeIcon.jpg");
 	
+	static final int LayoutWidth=900;
+	static final int LayoutHeight=600;
+	
+	private Container contentPane;
+		
+	private JPanel TextEditorPane = new JPanel(new BorderLayout());
+	private JPanel MindMapPane = new JPanel(new BorderLayout());
+	private JPanel AttributePane = new JPanel(new BorderLayout());
+	
+	private JSplitPane jsp2;
+	private JSplitPane jsp1;
+	
 	public MindMapInterface() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800, 600);
+		setSize(LayoutWidth, LayoutHeight);
+		contentPane = getContentPane();
 		createMenu();
 		createTool();
+		SetTextEditorPane();
+		MindMapPane();
+		SetAttributePane();
+		
+		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane, MindMapPane);
+		jsp1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jsp2, AttributePane);
+		
+		jsp1.setDividerLocation(650);
+		jsp2.setDividerLocation(200);
+		this.add(jsp1);
+		
 		setVisible(true);
 	}
 	void createMenu() {
@@ -62,12 +90,9 @@ public class MindMapInterface extends JFrame{
 		toolBar.setBackground(Color.LIGHT_GRAY);
 		toolBar.setSize(800, 50);
 		
-		Container c = getContentPane();
-		
 		ToolTipManager TTMan = ToolTipManager.sharedInstance();
 		TTMan.setInitialDelay(0);
 		TTMan.setDismissDelay(1000);
-		
 		
 		JButton newTool = new JButton(newToolImage);
 		newTool.setToolTipText("새로 만들기");
@@ -110,12 +135,86 @@ public class MindMapInterface extends JFrame{
 		changeTool.setPreferredSize(new Dimension(20, 20));
 		changeTool.setBorderPainted(false);
 		
-		c.add(toolBar, BorderLayout.NORTH);
+		contentPane.add(toolBar, BorderLayout.NORTH);
 		
+	}
+	
+	public void SetAttributePane() {
+		
+		JLabel name=new JLabel("Attribute Pane");
+		AttributePane.add(name, BorderLayout.NORTH);
+		
+		JPanel middlePanel= new JPanel();
+		GridLayout grd = new GridLayout(6,2);
+		grd.setVgap(20);
+		
+		middlePanel.setLayout(grd);
+		
+		JLabel NameNode=new JLabel("	TEXT:");
+		middlePanel.add(NameNode);
+		JTextField NameValue= new JTextField();
+		middlePanel.add(NameValue);
+		NameValue.setSize(60, 20);
+		
+		JLabel XNode=new JLabel("	X:");
+		middlePanel.add(XNode);
+		JTextField XValue= new JTextField();
+		middlePanel.add(XValue);
+		XValue.setSize(60, 20);
+		
+		JLabel YNode=new JLabel(	"Y:");
+		middlePanel.add(YNode);
+		JTextField YValue= new JTextField();
+		middlePanel.add(YValue);
+		YValue.setSize(60, 20);
+		
+		JLabel WidthNode=new JLabel("	W:");
+		middlePanel.add(WidthNode);
+		JTextField WidthValue= new JTextField();
+		middlePanel.add(WidthValue);
+		WidthValue.setSize(60, 20);
+		
+		JLabel HeightNode=new JLabel("	H:");
+		middlePanel.add(HeightNode);
+		JTextField HeightValue= new JTextField();
+		middlePanel.add(HeightValue);
+		HeightValue.setSize(60, 20);
+		
+		JLabel ColorNode=new JLabel("	Color:");
+		middlePanel.add(ColorNode);
+		JTextField ColorValue= new JTextField();
+		middlePanel.add(ColorValue);
+		ColorValue.setSize(60, 20);
+		
+		AttributePane.add(middlePanel, BorderLayout.CENTER);
+		JButton ChangeNode=new JButton("변경");
+		AttributePane.add(ChangeNode,BorderLayout.SOUTH);
+		
+		contentPane.add(AttributePane);
+		
+		}
+	
+	public void SetTextEditorPane() {
+		JLabel name= new JLabel("Text Editor Pane");
+		TextEditorPane.add(name, BorderLayout.NORTH);
+		JButton ChangeNode= new JButton("적용");
+		TextEditorPane.add(ChangeNode, BorderLayout.SOUTH);
+		JTextArea TextArea = new JTextArea();
+		JScrollPane TextScrollPane= new JScrollPane(TextArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		TextEditorPane.add(TextScrollPane);
+		contentPane.add(TextEditorPane);
+	}
+	
+	public void MindMapPane(){
+		JScrollPane MapScrollPane= new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JLabel name=new JLabel("Mind Map Pane");
+		MindMapPane.add(name, BorderLayout.NORTH);
+		MindMapPane.add(MapScrollPane);	
+		contentPane.add(MindMapPane);
 	}
 
 	public static void main(String[] args) {
-		MindMapInterface Mframe = new MindMapInterface();
+		new MindMapInterface();
 	}
 
 }
