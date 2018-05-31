@@ -43,16 +43,14 @@ public class MapApplyListener implements ActionListener {
 				}
 				
 				for (int i = 0; i < count; i++) {
-					
-					JLabel la = new JLabel(Integer.toString(i));
-					JLabel lb = new JLabel(TextAreaData[i]);
+					JLabel la = new JLabel(TextAreaData[i]);
+					int x = (int)(Math.random()*400)+50;
+					int y = (int)(Math.random()*400)+50;
 					la.setSize(40,20);
-					la.setLocation(500,500);
 					la.setBackground(labelColor[TextAreaDataCount[i]%5+1]);
+					la.setLocation(x, y);
 					la.setOpaque(true);
-					la.setVisible(true);
-					la.add(lb);
-					
+									
 					MindMapPane.add(la);
 				}
 			}		

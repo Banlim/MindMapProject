@@ -27,7 +27,7 @@ public class MindMapInterface extends JFrame{
 	
 		
 	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
-	protected JPanel MindMapPane = new JPanel(new BorderLayout());
+	protected JPanel MindMapPane = new JPanel(null);
 	protected JPanel AttributePane = new JPanel(new BorderLayout());
 	
 	private JSplitPane jsp2;
@@ -212,8 +212,9 @@ public class MindMapInterface extends JFrame{
 	public void MindMapPane(){
 		JScrollPane MapScrollPane= new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		JLabel name=new JLabel("Mind Map Pane");
-		MindMapPane.add(name, BorderLayout.NORTH);
-		MindMapPane.add(MapScrollPane);	
+		name.setLocation(MindMapPane.getX(), MindMapPane.getY());
+		MindMapPane.add(name);
+		MindMapPane.add(MapScrollPane);
 		contentPane.add(MindMapPane);
 	}
 
