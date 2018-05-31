@@ -23,10 +23,12 @@ public class MindMapInterface extends JFrame{
 	static final int LayoutHeight=600;
 	
 	private Container contentPane;
+	
+	
 		
-	private JPanel TextEditorPane = new JPanel(new BorderLayout());
-	private JPanel MindMapPane = new JPanel(new BorderLayout());
-	private JPanel AttributePane = new JPanel(new BorderLayout());
+	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
+	protected JPanel MindMapPane = new JPanel(new BorderLayout());
+	protected JPanel AttributePane = new JPanel(new BorderLayout());
 	
 	private JSplitPane jsp2;
 	private JSplitPane jsp1;
@@ -202,8 +204,10 @@ public class MindMapInterface extends JFrame{
 		JTextArea TextArea = new JTextArea();
 		JScrollPane TextScrollPane= new JScrollPane(TextArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		TextEditorPane.add(TextScrollPane);
+		ChangeNode.addActionListener(new MapApplyListener(MindMapPane, TextArea));
 		contentPane.add(TextEditorPane);
 	}
+	
 	
 	public void MindMapPane(){
 		JScrollPane MapScrollPane= new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
