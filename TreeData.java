@@ -6,12 +6,14 @@ public class TreeData {
 	private TreeData sibling;
 	private int height;
 	private String data;
+	TreeData next;
 	
-	public TreeData() {
+	public TreeData(String data) {
 		this.data = data;
-		this.child = child;
-		this.parent = parent;
-		this.sibling = sibling;
+		this.child = null;
+		this.parent = null;
+		this.sibling = null;
+		this.next = null;
 	}
 	public void setChild(TreeData newData) {
 		this.child = newData;
@@ -36,6 +38,9 @@ public class TreeData {
 	}
 	public int getHeight() {
 		return height;
+	}
+	public void setData(String newData) {
+		this.data = newData;
 	}
 	public String getData() {
 		return data;

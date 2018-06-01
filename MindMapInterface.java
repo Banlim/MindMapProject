@@ -155,6 +155,7 @@ public class MindMapInterface extends JFrame{
 		JLabel NameNode=new JLabel("	TEXT:");
 		middlePanel.add(NameNode);
 		JTextField NameValue= new JTextField();
+		NameValue.setEditable(false);
 		middlePanel.add(NameValue);
 		NameValue.setSize(60, 20);
 		
