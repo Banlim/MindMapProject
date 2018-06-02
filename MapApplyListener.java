@@ -48,7 +48,7 @@ public class MapApplyListener implements ActionListener {
 					TextAreaData[i] = st.nextToken();
 					TextAreaDataCount[i] = TextAreaData[i].lastIndexOf('\t');
 				}
-				TreeStructure TS = new TreeStructure(TextAreaData);
+				TreeStructure TS = new TreeStructure(TextAreaData, TextAreaDataCount);
 				TreeData newData = TS.start;
 				while(k < count) {
 					MindMapPane.add(TS.nodeLabel(newData));
