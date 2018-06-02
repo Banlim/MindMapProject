@@ -7,8 +7,8 @@ import javax.swing.*;
 
 public class MapApplyListener implements ActionListener {
 	private JPanel MindMapPane;
-	private JTextArea TextArea;
-	
+	private JTextArea Text;
+	private ImageIcon Image;
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
 	private Color[] labelColor = {Color.PINK, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.MAGENTA};
@@ -17,20 +17,26 @@ public class MapApplyListener implements ActionListener {
 	private StringTokenizer st;
 	
 	
-	public MapApplyListener(JPanel MindMapPane, JTextArea TextArea) {
+	public MapApplyListener(JPanel MindMapPane, JTextArea TextArea, ImageIcon Image) {
 		this.MindMapPane = MindMapPane;
-		this.TextArea = TextArea;
+		this.Text = TextArea;
+		this.Image = Image;
 	}
 	public void actionPerformed(ActionEvent e) {
-		
+		//String Text = (String)e.getSource();
+		//String Text = TextArea.getText();
+		String cmd = e.getActionCommand();
+		//ImageIcon image = (ImageIcon)e.getSource();
 		JButton btn = (JButton)e.getSource();
+		
 		int k = 0;
 		
-		if (btn.getText().equals("적용")) {
-			if(TextArea.getText() != "") {
+		if (cmd.equals("적용") || btn.getIcon() == Image) {
+			if(Text.getText() != "") {
 				MindMapPane.repaint();
+				System.out.print(Text);
 				
-				sb = new StringBuffer(TextArea.getText());
+				sb = new StringBuffer(Text.getText());
 				str = sb.toString();
 				st = new StringTokenizer(str, "\n");
 				int count = st.countTokens();
