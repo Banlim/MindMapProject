@@ -19,8 +19,8 @@ public class MindMapInterface extends JFrame{
 	private ImageIcon applyToolImage = new ImageIcon("ToolBarIcon\\applyIcon.jpg");
 	private ImageIcon changeToolImage = new ImageIcon("ToolBarIcon\\changeIcon.jpg");
 	
-	static final int LayoutWidth=900;
-	static final int LayoutHeight=600;
+	static final int LayoutWidth=1200;
+	static final int LayoutHeight=800;
 	
 	private Container contentPane;
 	
@@ -29,6 +29,7 @@ public class MindMapInterface extends JFrame{
 	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
 	protected JPanel MindMapPane = new JPanel(null);
 	protected JPanel AttributePane = new JPanel(new BorderLayout());
+	
 	
 	MapApplyListener ApplyListener = new MapApplyListener(MindMapPane, TextArea, applyToolImage);
 	
@@ -48,8 +49,8 @@ public class MindMapInterface extends JFrame{
 		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane, MindMapPane);
 		jsp1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jsp2, AttributePane);
 		
-		jsp1.setDividerLocation(650);
-		jsp2.setDividerLocation(200);
+		jsp1.setDividerLocation(LayoutWidth*3/4);
+		jsp2.setDividerLocation(LayoutWidth/4);
 		this.add(jsp1);
 		
 		setVisible(true);
@@ -217,6 +218,7 @@ public class MindMapInterface extends JFrame{
 		TextEditorPane.add(ApplyButton, BorderLayout.SOUTH);
 		JScrollPane TextScrollPane= new JScrollPane(TextArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		TextEditorPane.add(TextScrollPane);
+		TextArea.setTabSize(3);
 		ApplyButton.addActionListener(ApplyListener);
 		contentPane.add(TextEditorPane);
 	}
@@ -226,8 +228,8 @@ public class MindMapInterface extends JFrame{
 		JLabel name=new JLabel("Mind Map Pane");
 		name.setLocation(MindMapPane.getX(), MindMapPane.getY());
 		MindMapPane.add(name);
-		MindMapPane.add(MapScrollPane);
-		contentPane.add(MindMapPane);
+		MapScrollPane.add(MindMapPane);
+		contentPane.add(MapScrollPane);
 	}
 
 	public static void main(String[] args) {

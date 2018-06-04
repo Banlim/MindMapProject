@@ -1,18 +1,30 @@
 package userInteface;
 
-public class TreeData {
+public abstract class TreeData {
 	private TreeData child;
 	private TreeData parent;
 	private TreeData sibling;
-	private int height;
-	private String data;
+	private int level;
+	protected String data;
 	TreeData next;
 	
-	public TreeData(String data) {
-		this.data = data;
+	abstract int getX();
+	abstract void setX(int x);
+	abstract int getY();
+	abstract void setY(int y);
+	abstract int getWidth();
+	abstract void setWidth(int width);
+	abstract int getHeight();
+	abstract void setHeight(int height);
+	abstract int getColor();
+	abstract void setColor(int color);
+	
+	public TreeData() {
+		this.data = null;
 		this.child = null;
 		this.parent = null;
 		this.sibling = null;
+		this.level = 0;
 		this.next = null;
 	}
 	public void setChild(TreeData newData) {
@@ -33,11 +45,11 @@ public class TreeData {
 	public TreeData getSibling() {
 		return sibling;
 	}
-	public void setHeight(int newHeight) {
-		this.height = newHeight;
+	public void setlevel(int newlevel) {
+		this.level = newlevel;
 	}
-	public int getHeight() {
-		return height;
+	public int getlevel() {
+		return level;
 	}
 	public void setData(String newData) {
 		this.data = newData;
@@ -45,5 +57,5 @@ public class TreeData {
 	public String getData() {
 		return data;
 	}
-
+	
 }

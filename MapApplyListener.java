@@ -34,7 +34,7 @@ public class MapApplyListener implements ActionListener {
 		if (cmd.equals("Àû¿ë") || btn.getIcon() == Image) {
 			if(Text.getText() != "") {
 				MindMapPane.repaint();
-				System.out.print(Text);
+				
 				
 				sb = new StringBuffer(Text.getText());
 				str = sb.toString();
@@ -49,12 +49,15 @@ public class MapApplyListener implements ActionListener {
 					TextAreaDataCount[i] = TextAreaData[i].lastIndexOf('\t');
 				}
 				TreeStructure TS = new TreeStructure(TextAreaData, TextAreaDataCount);
-				TreeData newData = TS.start;
+				TreeData newData = TS.TreeStructureSetting();
+				
 				while(k < count) {
+					
 					MindMapPane.add(TS.nodeLabel(newData));
 					newData = newData.next;
 					k++;
 				}
+				
 			}		
 		}
 		
