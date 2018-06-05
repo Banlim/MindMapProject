@@ -24,10 +24,10 @@ public class NewFileListener implements ActionListener {
 		String cmd = e.getActionCommand();
 		JButton btn = (JButton)e.getSource();
 		if (cmd.equals("º¯°æ") || btn.getIcon() == Image) {
-			if(TextArea.getText() !=null) {
+			if(TextArea.getText() != null) {
 				TextArea.setText(" ");
 				MindMapPane.removeAll();
-				MindMapPane.repaint();			
+				//MindMapPane.repaint();			
 			}
 		}
 	}

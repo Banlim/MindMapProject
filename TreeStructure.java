@@ -91,8 +91,8 @@ public class TreeStructure {
 		//int childCount = node.getParent().
 		
 		if(node.getlevel() == 0) { // root ÀÏ ¶§ À§Ä¡¿Í ³ÐÀÌ, »ö±ò
-			node.setX(300);
-			node.setY(300);
+			node.setX(270);
+			node.setY(280);
 			node.setWidth(80);
 			node.setHeight(60);
 			

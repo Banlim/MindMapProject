@@ -33,6 +33,7 @@ public class MindMapInterface extends JFrame{
 	
 	MapApplyListener ApplyListener = new MapApplyListener(MindMapPane, TextArea, applyToolImage);
 	NewFileListener newFileListener = new NewFileListener(MindMapPane, TextArea, newToolImage);
+	MapSaveListener SaveListener = new MapSaveListener(MindMapPane, TextArea, saveToolImage);
 	
 	private JSplitPane jsp2;
 	private JSplitPane jsp1;
@@ -92,6 +93,7 @@ public class MindMapInterface extends JFrame{
 		
 		fileItem[0].addActionListener(newFileListener);
 		editItem[0].addActionListener(ApplyListener);
+		saveItem[0].addActionListener(SaveListener);
 				
 		this.setJMenuBar(menuBar);
 	}
@@ -156,6 +158,7 @@ public class MindMapInterface extends JFrame{
 		
 		applyTool.addActionListener(ApplyListener);
 		newTool.addActionListener(newFileListener);
+		saveTool.addActionListener(SaveListener);
 		
 	}
 	
