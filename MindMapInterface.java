@@ -1,15 +1,13 @@
-package projectMindmap;
+package userInteface;
 
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.*;
-
 
 
 
@@ -25,16 +23,16 @@ public class MindMapInterface extends JFrame{
 	static final int LayoutHeight=800;
 	
 	private Container contentPane;
-	private JScrollPane MapScrollPane;
-	private JTextArea TextArea;
+	
+	private JTextArea TextArea = new JTextArea();
 		
 	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
-	protected JPanel MindMapPane = new JPanel(new BorderLayout());
+	protected JPanel MindMapPane = new JPanel(null);
 	protected JPanel AttributePane = new JPanel(new BorderLayout());
-	protected JPanel MindMapArea=new JPanel(new BorderLayout());
+	
 	
 	MapApplyListener ApplyListener = new MapApplyListener(MindMapPane, TextArea, applyToolImage);
-	NewFileListener NewListener= new NewFileListener(MindMapPane,TextArea, newToolImage);
+	
 	private JSplitPane jsp2;
 	private JSplitPane jsp1;
 	
@@ -48,7 +46,7 @@ public class MindMapInterface extends JFrame{
 		MindMapPane();
 		SetAttributePane();
 		
-		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane,MindMapPane);
+		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane, MindMapPane);
 		jsp1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jsp2, AttributePane);
 		
 		jsp1.setDividerLocation(LayoutWidth*3/4);
@@ -92,7 +90,7 @@ public class MindMapInterface extends JFrame{
 		menuBar.add(saveMenu);
 		
 		editItem[0].addActionListener(ApplyListener);
-		fileItem[0].addActionListener(NewListener);
+		
 		this.setJMenuBar(menuBar);
 	}
 	void createTool() {
@@ -154,7 +152,6 @@ public class MindMapInterface extends JFrame{
 		
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		applyTool.addActionListener(ApplyListener);
-		newTool.addActionListener(NewListener);
 		
 	}
 	
@@ -219,21 +216,22 @@ public class MindMapInterface extends JFrame{
 		TextEditorPane.add(name, BorderLayout.NORTH);
 		JButton ApplyButton= new JButton("Àû¿ë");
 		TextEditorPane.add(ApplyButton, BorderLayout.SOUTH);
-		TextArea=new JTextArea();
-		TextArea.setEditable(true);
-		TextArea.setFont(new Font("°íµñÃ¼",Font.ITALIC,20));
 		JScrollPane TextScrollPane= new JScrollPane(TextArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		TextEditorPane.add(TextScrollPane,BorderLayout.CENTER);
+		TextEditorPane.add(TextScrollPane);
 		TextArea.setTabSize(3);
 		ApplyButton.addActionListener(ApplyListener);
 		contentPane.add(TextEditorPane);
 	}
 	
 	public void MindMapPane(){
+		JScrollPane MapScrollPane= new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		JLabel name=new JLabel("Mind Map Pane");
-		MindMapArea.add(name,BorderLayout.NORTH);
-		JScrollPane MapScrollPane= new JScrollPane(MindMapArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		MindMapPane.add(MapScrollPane);
+		name.setLocation(MindMapPane.getX(), MindMapPane.getY());
+		MindMapPane.add(name);
+		MapScrollPane.add(MindMapPane);
+		contentPane.add(MapScrollPane);
+		//MindMapPane.add(MapScrollPane);
+		//contentPane.add(MindMapPane);
 	}
 
 	public static void main(String[] args) {

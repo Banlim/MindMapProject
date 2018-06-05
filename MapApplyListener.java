@@ -1,4 +1,4 @@
-package projectMindmap;
+package userInteface;
 
 import java.awt.event.*;
 import java.util.StringTokenizer;
@@ -31,9 +31,11 @@ public class MapApplyListener implements ActionListener {
 		
 		int k = 0;
 		
-		if (cmd.equals("Ï†ÅÏö©") || btn.getIcon() == Image) {
-			if(Text.getText() !=null) {
+		if (cmd.equals("¿˚øÎ") || btn.getIcon() == Image) {
+			if(Text.getText() != "") {
 				MindMapPane.repaint();
+				
+				
 				sb = new StringBuffer(Text.getText());
 				str = sb.toString();
 				st = new StringTokenizer(str, "\n");
@@ -44,20 +46,36 @@ public class MapApplyListener implements ActionListener {
 					
 				for (int i = 0; i < count; i++) {
 					TextAreaData[i] = st.nextToken();
-					TextAreaDataCount[i] = TextAreaData[i].lastIndexOf('\t');
+					/*if(i==0) {
+						TextAreaDataCount[i] = 0;
+						continue;
+					}*/
+					TextAreaDataCount[i] = TextAreaData[i].lastIndexOf('\t')+1;
+					
 				}
 				TreeStructure TS = new TreeStructure(TextAreaData, TextAreaDataCount);
-				TreeData newData = TS.TreeStructureSetting();
+				//TreeData newData = TS.getStart();
+				TreeData newData = TS.start;
 				
 				while(k < count) {
+					//if(TS.TreeStructureSetting()) {
+						//TreeData newData = TS.start;
+						MindMapPane.add(TS.nodeLabel(newData));
+						//TS.print();
+						System.out.println(TextAreaData[k]);
+						System.out.println(TextAreaDataCount[k]);
+						System.out.println(newData.getlevel());
+						System.out.println(newData.getData());
+						newData = newData.next;
+						k++;
+					}
+						//MindMapPane.add(TS.nodeLabel());
 					
-					MindMapPane.add(TS.nodeLabel(newData));
-					newData = newData.next;
-					k++;
+				//		k++;
 				}
 				
 			}		
 		}
 		
 	}
-}
+//}
