@@ -1,4 +1,4 @@
-package userInteface;
+package projectMindmap;
 
 import java.awt.event.*;
 import java.util.StringTokenizer;
@@ -31,11 +31,9 @@ public class MapApplyListener implements ActionListener {
 		
 		int k = 0;
 		
-		if (cmd.equals("Àû¿ë") || btn.getIcon() == Image) {
-			if(Text.getText() != "") {
+		if (cmd.equals("ì ìš©") || btn.getIcon() == Image) {
+			if(Text.getText() !=null) {
 				MindMapPane.repaint();
-				
-				
 				sb = new StringBuffer(Text.getText());
 				str = sb.toString();
 				st = new StringTokenizer(str, "\n");
