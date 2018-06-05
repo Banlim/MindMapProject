@@ -21,6 +21,7 @@ public class MapApplyListener implements ActionListener {
 		this.MindMapPane = MindMapPane;
 		this.Text = TextArea;
 		this.Image = Image;
+		
 	}
 	public void actionPerformed(ActionEvent e) {
 		//String Text = (String)e.getSource();
@@ -33,6 +34,7 @@ public class MapApplyListener implements ActionListener {
 		
 		if (cmd.equals("Àû¿ë") || btn.getIcon() == Image) {
 			if(Text.getText() != "") {
+				MindMapPane.removeAll();
 				MindMapPane.repaint();
 				
 				
@@ -54,18 +56,23 @@ public class MapApplyListener implements ActionListener {
 					
 				}
 				TreeStructure TS = new TreeStructure(TextAreaData, TextAreaDataCount);
-				//TreeData newData = TS.getStart();
-				TreeData newData = TS.start;
+				TreeData newData = TS.getStart();
+				//TreeData newData = TS.start;
 				
 				while(k < count) {
-					//if(TS.TreeStructureSetting()) {
-						//TreeData newData = TS.start;
+					
 						MindMapPane.add(TS.nodeLabel(newData));
-						//TS.print();
-						System.out.println(TextAreaData[k]);
+						TS.print(newData);
+						/*System.out.println(TextAreaData[k]);
 						System.out.println(TextAreaDataCount[k]);
-						System.out.println(newData.getlevel());
-						System.out.println(newData.getData());
+						//System.out.println(newData.getlevel());
+						//System.out.println(newData.getData());
+						System.out.println(newData.getX());
+						System.out.println(newData.getY());
+						System.out.println(newData.getWidth());
+						System.out.println(newData.getHeight());*/
+					
+						
 						newData = newData.next;
 						k++;
 					}

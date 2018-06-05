@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 
 public class TreeStructure {
-	 TreeData start = null;
+	private TreeData start = null;
 	private TreeData last = null;
 	private TreeData node = null;
 	private TreeData temp = null;
@@ -13,6 +13,7 @@ public class TreeStructure {
 	
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
+	private int[] NodeChildCount;
 	
 	public TreeStructure(String [] TextAreaData, int [] TextAreaDataCount) {
 		this.TextAreaData = TextAreaData;
@@ -38,6 +39,7 @@ public class TreeStructure {
 						last.setSibling(node);
 						node.setParent(last.getParent());
 						node.setlevel(TextAreaDataCount[i]);
+						//NodeChildCount[i] = NodeChildCount[i];
 					}
 					else if(last.getData().lastIndexOf('\t') + 2 == TextAreaDataCount[i]) { // 앞의 노드가 현재 노드의 parent 일 때
 						node.setParent(last);
@@ -51,6 +53,7 @@ public class TreeStructure {
 								
 								node.setlevel(TextAreaDataCount[i]);
 								node.setParent(temp.getParent());
+								node.getParent().setChild(node);
 								node.setSibling(temp);
 								temp = null;
 								break;
@@ -70,7 +73,7 @@ public class TreeStructure {
 		//this.start = start;
 		//this.last = last;
 		//this.node = node;
-		//this.temp = temp;
+		
 		}
 	//public TreeData getNode() {
 		//return node;
@@ -85,16 +88,18 @@ public class TreeStructure {
 		
 		
 		JLabel la = new JLabel(node.getData());
+		//int childCount = node.getParent().
 		
 		if(node.getlevel() == 0) { // root 일 때 위치와 넓이, 색깔
-			node.setX(600);
-			node.setY(400);
+			node.setX(300);
+			node.setY(300);
 			node.setWidth(80);
 			node.setHeight(60);
-			//node.setColor(labelColor[node.getData().lastIndexOf('\t')%5+1].getRGB());
+			
+			node.setColor(labelColor[node.getData().lastIndexOf('\t')%5+1].getRGB());
 			// 속성페인에 들어갈 변수들 설정
 			
-			//JLabel la = new JLabel(node.getData());
+			
 			
 			la.setSize(node.getWidth(), node.getHeight());
 			la.setBackground(Color.BLUE);
@@ -106,6 +111,18 @@ public class TreeStructure {
 			
 			}
 		else {
+			if(node.getlevel() == 1) {
+				node.setX(0);
+				node.setY(0);
+				node.setWidth(70);
+				node.setHeight(50);
+				node.setColor(labelColor[node.getData().lastIndexOf('\t')%5 + 1].getRGB());
+				
+				la.setSize(node.getWidth(), node.getHeight());
+				la.setLocation(node.getX(), node.getY());
+				la.setBackground(new Color(node.getColor()));
+			
+			}
 			la.setSize(60, 40);
 			la.setBackground(labelColor[node.getlevel()%5+1]);
 			la.setLocation(400,400);
@@ -121,7 +138,7 @@ public class TreeStructure {
 		
 		return la;
 	}
-	void print() {
+	void print(TreeData node) {
 		System.out.println(node.getX());
 		System.out.println(node.getY());
 		System.out.println(node.getWidth());

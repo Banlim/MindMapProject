@@ -32,6 +32,7 @@ public class MindMapInterface extends JFrame{
 	
 	
 	MapApplyListener ApplyListener = new MapApplyListener(MindMapPane, TextArea, applyToolImage);
+	NewFileListener newFileListener = new NewFileListener(MindMapPane, TextArea, newToolImage);
 	
 	private JSplitPane jsp2;
 	private JSplitPane jsp1;
@@ -89,8 +90,9 @@ public class MindMapInterface extends JFrame{
 		menuBar.add(editMenu);
 		menuBar.add(saveMenu);
 		
+		fileItem[0].addActionListener(newFileListener);
 		editItem[0].addActionListener(ApplyListener);
-		
+				
 		this.setJMenuBar(menuBar);
 	}
 	void createTool() {
@@ -151,7 +153,9 @@ public class MindMapInterface extends JFrame{
 		changeTool.setBorderPainted(false);
 		
 		contentPane.add(toolBar, BorderLayout.NORTH);
+		
 		applyTool.addActionListener(ApplyListener);
+		newTool.addActionListener(newFileListener);
 		
 	}
 	
@@ -230,6 +234,10 @@ public class MindMapInterface extends JFrame{
 		MindMapPane.add(name);
 		MapScrollPane.add(MindMapPane);
 		contentPane.add(MapScrollPane);
+		/*System.out.println(MindMapPane.getX());
+		System.out.println(MindMapPane.getY());
+		System.out.println(MindMapPane.getWidth());
+		System.out.println(MindMapPane.getHeight());*/
 		//MindMapPane.add(MapScrollPane);
 		//contentPane.add(MindMapPane);
 	}

@@ -1,7 +1,13 @@
-package projectMindmap;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+package userInteface;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class NewFileListener implements ActionListener {
 	private JPanel MindMapPane;
@@ -17,9 +23,10 @@ public class NewFileListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		JButton btn = (JButton)e.getSource();
-		if (cmd.equals("새로 만들기") || btn.getIcon() == Image) {
+		if (cmd.equals("변경") || btn.getIcon() == Image) {
 			if(TextArea.getText() !=null) {
 				TextArea.setText(" ");
+				MindMapPane.removeAll();
 				MindMapPane.repaint();			
 			}
 		}
