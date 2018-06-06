@@ -1,6 +1,6 @@
 package userInteface;
 
-import java.awt.Color;
+//import java.awt.Color;
 
 class NodeLocation extends TreeData { // 한 노드에 대한 정보 클래스
 	private int x;

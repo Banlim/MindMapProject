@@ -1,9 +1,17 @@
 package userInteface;
 
-import java.awt.event.*;
+
 import java.util.StringTokenizer;
-import java.awt.*;
-import javax.swing.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 
 public class MapApplyListener implements ActionListener {
 	private JPanel MindMapPane;
@@ -11,10 +19,12 @@ public class MapApplyListener implements ActionListener {
 	private ImageIcon Image;
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
-	private Color[] labelColor = {Color.PINK, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.MAGENTA};
+	//private Color[] labelColor = {Color.PINK, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.MAGENTA};
 	private StringBuffer sb;
 	private String str;
 	private StringTokenizer st;
+	
+	private TreeData[] treeData;
 	
 	
 	public MapApplyListener(JPanel MindMapPane, JTextArea TextArea, ImageIcon Image) {
@@ -52,11 +62,13 @@ public class MapApplyListener implements ActionListener {
 						TextAreaDataCount[i] = 0;
 						continue;
 					}*/
-					TextAreaDataCount[i] = TextAreaData[i].lastIndexOf('\t')+1;
+					TextAreaDataCount[i] = TextAreaData[i].lastIndexOf('\t')+1; // 각 노드의 '\t'의 개수를 배열로 저장, 나중에 level로 쓰임
 					
 				}
 				TreeStructure TS = new TreeStructure(TextAreaData, TextAreaDataCount);
 				TreeData newData = TS.getStart();
+				treeData = new TreeData[count];
+				//XMLstructure XMLstr = new XMLstructure(newData);
 				//TreeData newData = TS.start;
 				
 				while(k < count) {
@@ -72,14 +84,20 @@ public class MapApplyListener implements ActionListener {
 						System.out.println(newData.getWidth());
 						System.out.println(newData.getHeight());*/
 					
-						
+						//XMLstructure XMLstr = new XMLstructure(newData);//XML형식으로 저장하기 위해 미리 save 해놓음
+						//XMLstr.XMLsave();
+						treeData[k] = newData; // XML을 구현하기 위해 TreeData 타입의 배열 생성 및 저장
 						newData = newData.next;
 						k++;
 					}
+				
 						//MindMapPane.add(TS.nodeLabel());
 					
 				//		k++;
 				}
+			else {
+				
+			}
 				
 			}		
 		}

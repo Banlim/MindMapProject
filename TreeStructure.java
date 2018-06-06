@@ -1,5 +1,7 @@
 package userInteface;
 
+
+
 import java.awt.Color;
 
 import javax.swing.JLabel;
@@ -13,7 +15,7 @@ public class TreeStructure {
 	
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
-	private int[] NodeChildCount;
+//	private int[] NodeChildCount;
 	
 	public TreeStructure(String [] TextAreaData, int [] TextAreaDataCount) {
 		this.TextAreaData = TextAreaData;

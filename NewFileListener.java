@@ -27,7 +27,7 @@ public class NewFileListener implements ActionListener {
 			if(TextArea.getText() != null) {
 				TextArea.setText(" ");
 				MindMapPane.removeAll();
-				//MindMapPane.repaint();			
+				MindMapPane.repaint();			
 			}
 		}
 	}

@@ -1,13 +1,29 @@
 package userInteface;
 
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.ToolTipManager;
+
+
 
 
 
@@ -154,6 +170,7 @@ public class MindMapInterface extends JFrame{
 		changeTool.setPreferredSize(new Dimension(20, 20));
 		changeTool.setBorderPainted(false);
 		
+		
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		
 		applyTool.addActionListener(ApplyListener);
@@ -236,6 +253,7 @@ public class MindMapInterface extends JFrame{
 		name.setLocation(MindMapPane.getX(), MindMapPane.getY());
 		MindMapPane.add(name);
 		MapScrollPane.add(MindMapPane);
+		MindMapPane.setPreferredSize(new Dimension(600, 600));
 		contentPane.add(MapScrollPane);
 		/*System.out.println(MindMapPane.getX());
 		System.out.println(MindMapPane.getY());
