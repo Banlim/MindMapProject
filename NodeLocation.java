@@ -9,6 +9,7 @@ class NodeLocation extends TreeData { // 한 노드에 대한 정보 클래스
 	private int height;
 	private int color;
 	
+	
 	public NodeLocation() {
 		super();
 		this.x = 0;

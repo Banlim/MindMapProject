@@ -27,10 +27,11 @@ public class MapApplyListener implements ActionListener {
 	private TreeData[] treeData;
 	
 	
-	public MapApplyListener(JPanel MindMapPane, JTextArea TextArea, ImageIcon Image) {
+	public MapApplyListener(JPanel MindMapPane, JTextArea TextArea, ImageIcon Image, TreeData[] treeData) {
 		this.MindMapPane = MindMapPane;
 		this.Text = TextArea;
 		this.Image = Image;
+		this.treeData = treeData;
 		
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -94,13 +95,16 @@ public class MapApplyListener implements ActionListener {
 						//MindMapPane.add(TS.nodeLabel());
 					
 				//		k++;
-				}
+			}
 			else {
 				
 			}
 				
 			}		
 		}
+	public TreeData[] getTreeData() {
+		return treeData;
+	}
 		
 	}
 //}

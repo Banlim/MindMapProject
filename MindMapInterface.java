@@ -45,11 +45,13 @@ public class MindMapInterface extends JFrame{
 	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
 	protected JPanel MindMapPane = new JPanel(null);
 	protected JPanel AttributePane = new JPanel(new BorderLayout());
+	private TreeData[] treeData;
 	
-	
-	MapApplyListener ApplyListener = new MapApplyListener(MindMapPane, TextArea, applyToolImage);
+	MapApplyListener ApplyListener = new MapApplyListener(MindMapPane, TextArea, applyToolImage, treeData);
 	NewFileListener newFileListener = new NewFileListener(MindMapPane, TextArea, newToolImage);
-	MapSaveListener SaveListener = new MapSaveListener(MindMapPane, TextArea, saveToolImage);
+	MapSaveListener SaveListener = new MapSaveListener(MindMapPane, TextArea, saveToolImage, treeData);
+	
+	//treeData = MapApplyListener.getTreeData();
 	
 	private JSplitPane jsp2;
 	private JSplitPane jsp1;
