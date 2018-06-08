@@ -45,11 +45,14 @@ public class MindMapInterface extends JFrame{
 	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
 	protected JPanel MindMapPane = new JPanel(null);
 	protected JPanel AttributePane = new JPanel(new BorderLayout());
-	private TreeData[] treeData;
+	//private TreeData[] treeData;
 	
-	MapApplyListener ApplyListener = new MapApplyListener(MindMapPane, TextArea, applyToolImage, treeData);
-	NewFileListener newFileListener = new NewFileListener(MindMapPane, TextArea, newToolImage);
-	MapSaveListener SaveListener = new MapSaveListener(MindMapPane, TextArea, saveToolImage, treeData);
+	ButtonEventListener ApplyListener = new ButtonEventListener(MindMapPane, TextArea, applyToolImage);
+	ButtonEventListener newFileListener = new ButtonEventListener(MindMapPane, TextArea, newToolImage);
+	ButtonEventListener SaveListener = new ButtonEventListener(MindMapPane, TextArea, saveToolImage);
+	ButtonEventListener SaveAsListener = new ButtonEventListener(MindMapPane, TextArea, saveAsToolImage);
+	ButtonEventListener openFileListener = new ButtonEventListener(MindMapPane, TextArea, openToolImage);
+	ButtonEventListener ChangeListener = new ButtonEventListener(MindMapPane, TextArea, changeToolImage);
 	
 	//treeData = MapApplyListener.getTreeData();
 	
@@ -109,9 +112,13 @@ public class MindMapInterface extends JFrame{
 		menuBar.add(editMenu);
 		menuBar.add(saveMenu);
 		
-		fileItem[0].addActionListener(newFileListener);
-		editItem[0].addActionListener(ApplyListener);
-		saveItem[0].addActionListener(SaveListener);
+		fileItem[0].addActionListener(newFileListener); // 새로 만들기
+		fileItem[1].addActionListener(openFileListener); // 열기
+		//fileItem[2].addActionListener(arg0);
+		editItem[0].addActionListener(ApplyListener); // 적용
+		editItem[1].addActionListener(ChangeListener); // 변경
+		saveItem[0].addActionListener(SaveListener); // 저장
+		saveItem[1].addActionListener(SaveAsListener); // 다른 이름으로 저장
 				
 		this.setJMenuBar(menuBar);
 	}
@@ -176,8 +183,11 @@ public class MindMapInterface extends JFrame{
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		
 		applyTool.addActionListener(ApplyListener);
+		changeTool.addActionListener(ChangeListener);
 		newTool.addActionListener(newFileListener);
+		openTool.addActionListener(openFileListener);
 		saveTool.addActionListener(SaveListener);
+		saveAsTool.addActionListener(SaveAsListener);
 		
 	}
 	
@@ -232,6 +242,7 @@ public class MindMapInterface extends JFrame{
 		AttributePane.add(middlePanel, BorderLayout.CENTER);
 		JButton ChangeNode=new JButton("변경");
 		AttributePane.add(ChangeNode,BorderLayout.SOUTH);
+		ChangeNode.addActionListener(ChangeListener);
 		
 		contentPane.add(AttributePane);
 		

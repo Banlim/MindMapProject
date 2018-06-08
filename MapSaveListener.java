@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,22 +16,29 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.transform.stream.StreamResult;
 
 public class MapSaveListener implements ActionListener {
 	private JPanel MindMapPane;
 	private JTextArea Text;
 	private ImageIcon Image;
-	private TreeData[] treeData;
+	//private TreeData[] treeData;
 	private JFileChooser fileSave;
+	//private TreeData newData;
+	private TreeData newData;
 	
-	public MapSaveListener(JPanel MindMapPane, JTextArea TextArea, ImageIcon Image, TreeData[] treeData) {
+	public MapSaveListener(JPanel MindMapPane, JTextArea TextArea, ImageIcon Image) {
 		this.MindMapPane = MindMapPane;
 		this.Text = TextArea;
 		this.Image = Image;
-		this.treeData = treeData;
 		
-		fileSave = new JFileChooser();
 		
+		
+		//fileSave = new JFileChooser();
+		
+	}
+	public MapSaveListener(TreeData newData) {
+		this.newData = newData;
 	}
 
 	@Override
@@ -68,9 +76,18 @@ public class MapSaveListener implements ActionListener {
 					//fs.close();
 				ReturnFilePath filePath = new ReturnFilePath();
 				if(filePath != null) {
-					XMLstructure xml = new XMLstructure(treeData);
-					xml.XMLsave(filePath.PathReturn());
+					//XMLstructure xml = new XMLstructure(); // 적용 버튼으로 구현된 각 노드의 정보를 
+					//StreamResult result = xml.getResult();
+					//result = new StreamResult(new StringWriter());
+					//String xmlString = xml.XMLsave(filePath.PathReturn(), newData);
+					//byte[] contentInBytes = xmlString.getBytes();
+					
+					//FileWriter fw = new FileWriter(xml.XMLsave(filePath.PathReturn(), newData));
+					//filePath.getFOS().write(contentInBytes);
+					//filePath.getFOS().flush();
+					//filePath.getFOS().close();
 				}
+				//System.out.println(contentInBytes.toString());
 					
 				}
 				catch(Exception e2) {
