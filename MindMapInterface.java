@@ -54,7 +54,7 @@ public class MindMapInterface extends JFrame{
 	ButtonEventListener openFileListener = new ButtonEventListener(MindMapPane, TextArea, openToolImage);
 	ButtonEventListener ChangeListener = new ButtonEventListener(MindMapPane, TextArea, changeToolImage);
 	
-	//treeData = MapApplyListener.getTreeData();
+	
 	
 	private JSplitPane jsp2;
 	private JSplitPane jsp1;

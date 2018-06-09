@@ -35,12 +35,15 @@ public class XMLstructure  {
 	public XMLstructure(TreeData[] treeData) {
 		this.treeData = treeData;
 		this.returnPath = "saving.xml";
+		//XMLsave();
+		
 	}
 	public XMLstructure(TreeData[] treeData, String returnPath) {
 		//this.newData = newData;
 		this.treeData = treeData;
 		this.returnPath = returnPath + ".xml";
 		//treeData = MapApplyListener.getTreeData();
+		
 	}
 	
 		
@@ -129,7 +132,15 @@ public class XMLstructure  {
 			trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			trans.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource doms = new DOMSource(doc);
+			
+			/*FileOutputStream fop = null;
+			File file;
+			
+			file = new File(returnPath);
+			fop = new FileOutputStream(file);*/
+			
 			result = new StreamResult(new StringWriter());
+			//result = new StreamResult(fop);
 			trans.transform(doms, result);
 			
 			

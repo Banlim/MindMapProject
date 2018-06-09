@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -103,13 +104,11 @@ public class ButtonEventListener implements ActionListener {
 						k++;
 					}
 				
-						//MindMapPane.add(TS.nodeLabel());
 					
-				//		k++;
 				}
 			}
 			
-			if(cmd.equals("새로 만들기") || btn.getIcon() == Image) { // 새로만들기를 눌렀을 때
+			else if(cmd.equals("새로 만들기") || btn.getIcon() == Image) { // 새로만들기를 눌렀을 때
 				if(Text.getText() != null) {
 					Text.setText(" ");
 					MindMapPane.removeAll();
@@ -119,7 +118,7 @@ public class ButtonEventListener implements ActionListener {
 				
 			}
 			
-			if(cmd.equals("열기") || btn.getIcon() == Image) { // 열기 눌렀을 때
+			else if(cmd.equals("열기") || btn.getIcon() == Image) { // 열기 눌렀을 때
 				
 			}
 			
@@ -130,6 +129,8 @@ public class ButtonEventListener implements ActionListener {
 				//String path = fp.PathReturn();
 				XMLstructure xmlstr = new XMLstructure(treeData);
 				xmlstr.XMLsave();
+				//JOptionPane.showMessageDialog(null, "저장되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+				
 				
 				
 				/*try {
@@ -153,16 +154,20 @@ public class ButtonEventListener implements ActionListener {
 				*/
 			}
 			
-			if(cmd.equals("다른 이름으로 저장") || btn.getIcon() == Image) { // 다른 이름으로 저장 눌렀을 때
-				//ReturnFilePath fp = new ReturnFilePath();
-				//String path = fp.PathReturn();
-				//XMLstructure xmlstr = new XMLstructure(treeData, path);
-				//xmlstr.XMLsave();
+			else if(cmd.equals("다른 이름으로 저장") || btn.getIcon() == Image) { // 다른 이름으로 저장 눌렀을 때
+				ReturnFilePath fp = new ReturnFilePath();
+				String path = fp.PathReturn();
+				XMLstructure xmlstr = new XMLstructure(treeData, path);
+				xmlstr.XMLsave();
 			}
 			
-			if(cmd.equals("변경") || btn.getIcon() == Image) { // 변경 눌렀을 때
+			else if(cmd.equals("변경") || btn.getIcon() == Image) { // 변경 눌렀을 때
 				
 			}
+			else {
+				
+			}
+		
 				
 				
 		}
