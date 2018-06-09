@@ -133,17 +133,17 @@ public class XMLstructure  {
 			trans.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource doms = new DOMSource(doc);
 			
-			/*FileOutputStream fop = null;
+			//FileOutputStream fop = null;
 			File file;
 			
 			file = new File(returnPath);
-			fop = new FileOutputStream(file);*/
+			//fop = new FileOutputStream(file);
 			
-			result = new StreamResult(new StringWriter());
-			//result = new StreamResult(fop);
+			//result = new StreamResult(new StringWriter());
+			result = new StreamResult(file);
 			trans.transform(doms, result);
 			
-			
+			/*
 			FileOutputStream fop = null;
 			File file;
 			
@@ -161,7 +161,7 @@ public class XMLstructure  {
 			
 			fop.write(contentInBytes);
 			fop.flush();
-			fop.close();
+			fop.close();*/
 			
 		}
 		
@@ -170,14 +170,14 @@ public class XMLstructure  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (FileNotFoundException e) {
+		//catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) {
+			//e.printStackTrace();
+		//}
+		//catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			//e.printStackTrace();
+		//}
 		catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -18,8 +18,8 @@ public class ReturnFilePath {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML Save",".xml");
 		fileChooser.setFileFilter(filter);
 		
-		//fileChooser.setDialogTitle("다른 이름으로 저장");
-		//fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setDialogTitle("다른 이름으로 저장");
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		
 		int ret = fileChooser.showSaveDialog(null);
 		if(ret != JFileChooser.APPROVE_OPTION) {// 사용자가 창을 강제로 닫거나, 취소 버튼을 누른 경우

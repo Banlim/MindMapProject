@@ -41,6 +41,7 @@ public class MindMapInterface extends JFrame{
 	private Container contentPane;
 	
 	private JTextArea TextArea = new JTextArea();
+	//private TreeData[] treeData;
 		
 	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
 	protected JPanel MindMapPane = new JPanel(null);
