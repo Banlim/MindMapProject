@@ -22,6 +22,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 public class XMLstructure  {
@@ -61,43 +62,131 @@ public class XMLstructure  {
 			
 			int i = 0;
 			
+			Element NodeElement = doc.createElement("Node");
+			doc.appendChild(NodeElement);
+			
+		//	TreeData newData = treeData[0];
+			//TreeData last = null;
+			
 			while(i < treeData.length) {
+				Element childElement;
+				Element parentElement = null;
+				Element previousElement = null;
+				
 		
 				if(treeData[i].getlevel() == 0) {
-					Element rootElement = (doc).createElement("root");
-					((Node) doc).appendChild(rootElement);
-					
-					Element DataElement = doc.createElement("Data");
-					DataElement.appendChild(doc.createTextNode(treeData[i].getData()));
-					rootElement.appendChild(DataElement);
-					
-					Element XElement = doc.createElement("X");
-					XElement.appendChild(doc.createTextNode("" + treeData[i].getX()));
-					rootElement.appendChild(XElement);
-					
-					Element YElement = doc.createElement("Y");
-					YElement.appendChild(doc.createTextNode("" + treeData[i].getY()));
-					rootElement.appendChild(YElement);
-					
-					Element WidthElement = doc.createElement("Width");
-					WidthElement.appendChild(doc.createTextNode("" + treeData[i].getWidth()));
-					rootElement.appendChild(WidthElement);
-					
-					Element HeightElement = doc.createElement("Height");
-					HeightElement.appendChild(doc.createTextNode("" + treeData[i].getHeight()));
-					rootElement.appendChild(HeightElement);
+					childElement = (doc).createElement("root");
+					NodeElement.appendChild(childElement);
 					
 				}
-				else if(treeData[i].getlevel() == treeData[i-1].getlevel()) { // 현재 노드랑 이전 노드의 level이 같을 때(sibling)
-					Element childElement = doc.createElement("child" + treeData[i].getlevel() );
-					Element parentElement = (Element) childElement.getPreviousSibling().getParentNode();
-					parentElement.appendChild(childElement);
-					parentElement.appendChild(doc.createTextNode(treeData[i].getData()));
-					parentElement.appendChild(doc.createTextNode("X : " + treeData[i].getX()));
-					parentElement.appendChild(doc.createTextNode("Y : " + treeData[i].getY()));
-					parentElement.appendChild(doc.createTextNode("Width : " + treeData[i].getWidth()));
-					parentElement.appendChild(doc.createTextNode("Height : " + treeData[i].getHeight()));				
+				
+				
+				else { // 현재 노드와 이전 노드의 level이 같을 때
+					childElement = doc.createElement("child" + treeData[i].getlevel());
+					//Node rootChild = NodeElement.getFirstChild();
+					
+					NodeElement.appendChild(childElement);
+					
+					
+					/*NodeList PreviousElementName = NodeElement.getElementsByTagName("child" + treeData[i].getlevel());
+					for(int j = 0; j < PreviousElementName.getLength(); j++) {
+						if(PreviousElementName.item(j).getFirstChild().getNodeValue().equals(treeData[i-1].getData()))
+							previousElement = (Element) PreviousElementName.item(j);
+					}*/
+					//parentElement = (Element) previousElement.getParentNode();
+					//NodeList ParentElementName = rootElement.getElementsByTagName("child" + (treeData[i].getlevel() - 1));
+					//parentElement = ParentElementName.item(0);
+					//String parentElementName = childElement.getElementsByTagName("child" + treeData[i-1].getlevel());
+					//parentElement.appendChild(childElement);
+						
 				}
+				/*else if(treeData[i].getlevel() + 1 == treeData[i-1].getlevel()) { //현재 노드가 이전 노드의 자식일 때
+					childElement = doc.createElement("child" + treeData[i].getlevel());
+					NodeElement.appendChild(childElement);
+					/*NodeList PreviousElementName = NodeElement.getElementsByTagName("child" + treeData[i-1].getlevel());
+					for(int j = 0; j < PreviousElementName.getLength(); j++) {
+						if(PreviousElementName.item(j).getFirstChild().getNodeValue().equals(treeData[i-1].getData()))
+							previousElement = (Element) PreviousElementName.item(j);
+					}*/
+					//parentElement = childElement.get
+					//parentElement.appendChild(childElement);
+					
+				/*}
+					
+				else {// 이전 노드와 현재 노드가 상관 없을 때
+					childElement = doc.createElement("child" + treeData[i].getlevel());
+					for(int j = 0; j < i; j++) {
+						TreeData temp = treeData[j];
+						if(temp.getlevel() == treeData[i].getlevel()) {
+							parentElement = (Element) childElement.getPreviousSibling().getParentNode();
+							//parentElement.appendChild(childElement);
+						}
+					}
+				}*/
+					
+								
+					
+				//childElement = doc.createElement("Child"+ newData.getlevel());
+				//NodeElement.appendChild(childElement);
+					
+				//NodeElement.appendChild(childElement);
+				
+				Element DataElement = doc.createElement("Data");
+				DataElement.appendChild(doc.createTextNode(treeData[i].getData()));
+				childElement.appendChild(DataElement);
+					
+				Element XElement = doc.createElement("X");
+				XElement.appendChild(doc.createTextNode("" + treeData[i].getX()));
+				childElement.appendChild(XElement);
+					
+				Element YElement = doc.createElement("Y");
+				YElement.appendChild(doc.createTextNode("" + treeData[i].getY()));
+				childElement.appendChild(YElement);
+					
+				Element WidthElement = doc.createElement("Width");
+				WidthElement.appendChild(doc.createTextNode("" + treeData[i].getWidth()));
+				childElement.appendChild(WidthElement);
+					
+				Element HeightElement = doc.createElement("Height");
+				HeightElement.appendChild(doc.createTextNode("" + treeData[i].getHeight()));
+				childElement.appendChild(HeightElement);
+					
+				Element ColorElement = doc.createElement("Color");
+				ColorElement.appendChild(doc.createTextNode("" + treeData[i].getColor()));
+				childElement.appendChild(ColorElement);
+				
+				Element LevelElement = doc.createElement("level");
+				LevelElement.appendChild(doc.createElement("" + treeData[i].getlevel()));
+				childElement.appendChild(LevelElement);
+				
+				i++;
+				
+			//	parentElement.appendChild(childElement);
+				//previousElement = childElement;
+				
+				/*if(newData.getChild() != null) {
+					newData = newData.getChild();
+				}
+				else if(newData.getSibling() != null) {
+					newData = newData.getSibling();
+				}
+				else {
+					while(true) {
+						newData = newData.getParent();
+						if(newData.getSibling() != null) {
+							newData = newData.getSibling();
+							break;
+						}
+					}
+				}*/
+					
+				
+				
+			
+				
+		
+					
+				
 				/*else if(treeData[i].getlevel() == treeData[i-1].getlevel() + 1) { //현재 노드가 이전 노드의 자식일 때
 					Element childElement = doc.createElement("child" + treeData[i].getlevel());
 					Element parentElement = (Element) childElement.getParentNode();
@@ -119,12 +208,15 @@ public class XMLstructure  {
 						
 					}
 				}*/
-				
+				//last = newData;
 				//newData = newData.next;
-				i++;
+			}
+				
+		
+	
 			
 				
-			}
+			
 			
 			TransformerFactory tff = TransformerFactory.newInstance();
 			Transformer trans = tff.newTransformer();
@@ -142,6 +234,7 @@ public class XMLstructure  {
 			//result = new StreamResult(new StringWriter());
 			result = new StreamResult(file);
 			trans.transform(doms, result);
+			
 			
 			/*
 			FileOutputStream fop = null;
@@ -164,6 +257,9 @@ public class XMLstructure  {
 			fop.close();*/
 			
 		}
+		
+			
+		
 		
 		//return result.getWriter().toString().trim();
 		catch (ParserConfigurationException e) {
