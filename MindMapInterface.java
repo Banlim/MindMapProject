@@ -73,8 +73,8 @@ public class MindMapInterface extends JFrame{
 		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane, MindMapPane);
 		jsp1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jsp2, AttributePane);
 		
-		jsp1.setDividerLocation(LayoutWidth*3/4);
-		jsp2.setDividerLocation(LayoutWidth/4);
+		jsp1.setDividerLocation(LayoutWidth*4/5);
+		jsp2.setDividerLocation(LayoutWidth/5);
 		this.add(jsp1);
 		
 		setVisible(true);

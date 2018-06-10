@@ -5,6 +5,7 @@ public abstract class TreeData {
 	private TreeData parent;
 	private TreeData sibling;
 	private int level;
+	private int orderLevel; // 현재 레벨이 몇 번째로 나왔는지?
 	protected String data;
 	TreeData next;
 	
@@ -25,6 +26,7 @@ public abstract class TreeData {
 		this.parent = null;
 		this.sibling = null;
 		this.level = 0;
+		this.orderLevel = 0;
 		this.next = null;
 	}
 	public void setChild(TreeData newData) {
@@ -56,6 +58,12 @@ public abstract class TreeData {
 	}
 	public String getData() {
 		return data;
+	}
+	public void setOrderLevel(int newOrderLevel) {
+		this.orderLevel = newOrderLevel;
+	}
+	public int getOrderLevel() {
+		return orderLevel;
 	}
 	
 }
