@@ -1,4 +1,4 @@
-package userInteface;
+package userInterface;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,5 @@
-package userInteface;
+package userInterface;
+
 
 
 
@@ -7,7 +8,10 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 
+import javax.swing.AbstractButton;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,25 +39,35 @@ public class MindMapInterface extends JFrame{
 	private ImageIcon applyToolImage = new ImageIcon("ToolBarIcon\\applyIcon.jpg");
 	private ImageIcon changeToolImage = new ImageIcon("ToolBarIcon\\changeIcon.jpg");
 	
+	private Image newImage = newToolImage.getImage();
+	private Image openImage = openToolImage.getImage();
+	private Image saveImage = saveToolImage.getImage();
+	private Image saveAsImage = saveAsToolImage.getImage();
+	private Image applyImage = applyToolImage.getImage();
+	private Image changeImage = changeToolImage.getImage();
+	
+	private Icon icon;
+	
+	
+	
 	static final int LayoutWidth=1200;
 	static final int LayoutHeight=800;
 	
 	private Container contentPane;
 	
 	private JTextArea TextArea = new JTextArea();
-	//private TreeData[] treeData;
-		
+	
 	protected JPanel TextEditorPane = new JPanel(new BorderLayout());
 	protected JPanel MindMapPane = new JPanel(null);
 	protected JPanel AttributePane = new JPanel(new BorderLayout());
-	//private TreeData[] treeData;
+
 	
-	ButtonEventListener ApplyListener = new ButtonEventListener(MindMapPane, TextArea, applyToolImage);
-	ButtonEventListener newFileListener = new ButtonEventListener(MindMapPane, TextArea, newToolImage);
-	ButtonEventListener SaveListener = new ButtonEventListener(MindMapPane, TextArea, saveToolImage);
-	ButtonEventListener SaveAsListener = new ButtonEventListener(MindMapPane, TextArea, saveAsToolImage);
-	ButtonEventListener openFileListener = new ButtonEventListener(MindMapPane, TextArea, openToolImage);
-	ButtonEventListener ChangeListener = new ButtonEventListener(MindMapPane, TextArea, changeToolImage);
+	private ButtonEventListener ApplyListener = new ButtonEventListener(MindMapPane, TextArea, applyImage);
+	private ButtonEventListener newFileListener = new ButtonEventListener(MindMapPane, TextArea, newImage);
+	private ButtonEventListener SaveListener = new ButtonEventListener(MindMapPane, TextArea, saveImage);
+	private ButtonEventListener SaveAsListener = new ButtonEventListener(MindMapPane, TextArea, saveAsImage);
+	private ButtonEventListener openFileListener = new ButtonEventListener(MindMapPane, TextArea, openImage);
+	private ButtonEventListener ChangeListener = new ButtonEventListener(MindMapPane, TextArea, changeImage);
 	
 	
 	
@@ -69,6 +83,9 @@ public class MindMapInterface extends JFrame{
 		SetTextEditorPane();
 		MindMapPane();
 		SetAttributePane();
+		
+		
+		
 		
 		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane, MindMapPane);
 		jsp1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jsp2, AttributePane);
@@ -107,12 +124,6 @@ public class MindMapInterface extends JFrame{
 			saveMenu.add(saveItem[i]);
 			saveMenu.addSeparator();
 		}
-		
-		
-		menuBar.add(fileMenu);
-		menuBar.add(editMenu);
-		menuBar.add(saveMenu);
-		
 		fileItem[0].addActionListener(newFileListener); // 새로 만들기
 		fileItem[1].addActionListener(openFileListener); // 열기
 		//fileItem[2].addActionListener(arg0);
@@ -120,6 +131,13 @@ public class MindMapInterface extends JFrame{
 		editItem[1].addActionListener(ChangeListener); // 변경
 		saveItem[0].addActionListener(SaveListener); // 저장
 		saveItem[1].addActionListener(SaveAsListener); // 다른 이름으로 저장
+		
+		
+		menuBar.add(fileMenu);
+		menuBar.add(editMenu);
+		menuBar.add(saveMenu);
+		
+		
 				
 		this.setJMenuBar(menuBar);
 	}
@@ -135,6 +153,8 @@ public class MindMapInterface extends JFrame{
 		JButton newTool = new JButton();
 		newTool.setIcon(newToolImage);
 		newTool.setToolTipText("새로 만들기");
+		newTool.setName("newTool");
+		newTool.addActionListener(newFileListener);
 		toolBar.add(newTool);
 		newTool.setPreferredSize(new Dimension(20, 20));
 		newTool.setBorderPainted(false);
@@ -143,6 +163,8 @@ public class MindMapInterface extends JFrame{
 		JButton openTool = new JButton();
 		openTool.setIcon(openToolImage);
 		openTool.setToolTipText("열기");
+		openTool.setName("openTool");
+		openTool.addActionListener(openFileListener);
 		toolBar.add(openTool);
 		openTool.setPreferredSize(new Dimension(20, 20));
 		openTool.setBorderPainted(false);
@@ -150,7 +172,10 @@ public class MindMapInterface extends JFrame{
 		
 		JButton saveTool = new JButton();
 		saveTool.setIcon(saveToolImage);
+		//saveTool.setText("저장");
+		saveTool.setName("saveTool");
 		saveTool.setToolTipText("저장");
+		saveTool.addActionListener(SaveListener);
 		toolBar.add(saveTool);
 		saveTool.setPreferredSize(new Dimension(20, 20));
 		saveTool.setBorderPainted(false);
@@ -159,6 +184,8 @@ public class MindMapInterface extends JFrame{
 		JButton saveAsTool = new JButton();
 		saveAsTool.setIcon(saveAsToolImage);
 		saveAsTool.setToolTipText("다른 이름으로 저장");
+		saveAsTool.setName("saveAsTool");
+		saveAsTool.addActionListener(SaveAsListener);
 		toolBar.add(saveAsTool);
 		saveAsTool.setPreferredSize(new Dimension(20, 20));
 		saveAsTool.setBorderPainted(false);
@@ -167,6 +194,8 @@ public class MindMapInterface extends JFrame{
 		JButton applyTool = new JButton();
 		applyTool.setIcon(applyToolImage);
 		applyTool.setToolTipText("적용");
+		applyTool.setName("applyTool");
+		applyTool.addActionListener(ApplyListener);
 		toolBar.add(applyTool);
 		applyTool.setPreferredSize(new Dimension(20, 20));
 		applyTool.setBorderPainted(false);
@@ -176,19 +205,22 @@ public class MindMapInterface extends JFrame{
 		JButton changeTool = new JButton();
 		changeTool.setIcon(changeToolImage);
 		changeTool.setToolTipText("변경");
+		changeTool.setName("changeTool");
+		changeTool.addActionListener(ChangeListener);
 		toolBar.add(changeTool);
 		changeTool.setPreferredSize(new Dimension(20, 20));
 		changeTool.setBorderPainted(false);
 		
 		
+		
+		
+		
+		
+		
+		
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		
-		applyTool.addActionListener(ApplyListener);
-		changeTool.addActionListener(ChangeListener);
-		newTool.addActionListener(newFileListener);
-		openTool.addActionListener(openFileListener);
-		saveTool.addActionListener(SaveListener);
-		saveAsTool.addActionListener(SaveAsListener);
+		
 		
 	}
 	
@@ -269,12 +301,7 @@ public class MindMapInterface extends JFrame{
 		MapScrollPane.add(MindMapPane);
 		MindMapPane.setPreferredSize(new Dimension(600, 600));
 		contentPane.add(MapScrollPane);
-		/*System.out.println(MindMapPane.getX());
-		System.out.println(MindMapPane.getY());
-		System.out.println(MindMapPane.getWidth());
-		System.out.println(MindMapPane.getHeight());*/
-		//MindMapPane.add(MapScrollPane);
-		//contentPane.add(MindMapPane);
+	
 	}
 
 	public static void main(String[] args) {

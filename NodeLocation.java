@@ -1,4 +1,6 @@
-package userInteface;
+package userInterface;
+
+import userInterface.TreeData;
 
 //import java.awt.Color;
 

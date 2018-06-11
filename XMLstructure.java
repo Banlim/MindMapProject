@@ -1,4 +1,4 @@
-package userInteface;
+package userInterface;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,23 +27,32 @@ import org.w3c.dom.NodeList;
 
 public class XMLstructure  {
 	
-	//private TreeData newData;
-	private TreeData[] treeData;
+	//private static final Object[] treeData = null;
+	private TreeData[] treeData = new TreeData[100];
+	//private TreeData[] treeData = new NodeLocation[100];
 	private StreamResult result;
 	private String xmlString;
 	private String returnPath;
+	private int count;
 	
 	public XMLstructure(TreeData[] treeData) {
+		//this.treeData = treeData;
+		//this.treeData = treeData;
 		this.treeData = treeData;
 		this.returnPath = "saving.xml";
-		//XMLsave();
+		//System.out.println(treeData[0].getData());
+		XMLsave();
+
 		
 	}
-	public XMLstructure(TreeData[] treeData, String returnPath) {
+	public XMLstructure(TreeData[] tree, String returnPath, int count) {
 		//this.newData = newData;
-		this.treeData = treeData;
+	
+		this.treeData = tree;
 		this.returnPath = returnPath + ".xml";
+		this.count = count;
 		//treeData = MapApplyListener.getTreeData();
+		XMLsave();
 		
 	}
 	
@@ -51,16 +60,17 @@ public class XMLstructure  {
 		
 	
 	
-	public void XMLsave() {
+	private void XMLsave() {
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder;
 			docBuilder = docFactory.newDocumentBuilder();
 			org.w3c.dom.Document doc = docBuilder.newDocument();
+			System.out.println("전달!");
+			System.out.println(treeData[0].getX());
 			
-			
-			
-			int i = 0;
+			//boolean TF = true;
+			//int i = 0;
 			
 			Element NodeElement = doc.createElement("Node");
 			doc.appendChild(NodeElement);
@@ -68,25 +78,27 @@ public class XMLstructure  {
 		//	TreeData newData = treeData[0];
 			//TreeData last = null;
 			
-			while(i < treeData.length) {
-				Element childElement;
+			for(int i = 0; i < count; i++) {
+				System.out.println("호잇");
+				System.out.println(treeData[i].getY());
+				
 				//Element parentElement = null;
 				//Element previousElement = null;
 				
 		
-				if(treeData[i].getlevel() == 0) {
+				/*if(treeData[i].getlevel() == 0) {
 					childElement = (doc).createElement("root");
 					NodeElement.appendChild(childElement);
 					
-				}
+				}*/
 				
 				
-				else { // 현재 노드와 이전 노드의 level이 같을 때
-					childElement = doc.createElement("child" + treeData[i].getlevel());
+				//else { // 현재 노드와 이전 노드의 level이 같을 때
+					Element childElement = doc.createElement("child" + treeData[i].getlevel());
 					//Node rootChild = NodeElement.getFirstChild();
 					
 					NodeElement.appendChild(childElement);
-				}
+				//}
 			
 				
 				Element DataElement = doc.createElement("Data");
@@ -113,12 +125,12 @@ public class XMLstructure  {
 				ColorElement.appendChild(doc.createTextNode("" + treeData[i].getColor()));
 				childElement.appendChild(ColorElement);
 				
-				//Element LevelElement = doc.createElement("level");
-				//LevelElement.appendChild(doc.createElement("" + treeData[i].getlevel()));
-				//childElement.appendChild(LevelElement);
+				/*Element LevelElement = doc.createElement("level");
+				LevelElement.appendChild(doc.createElement("" + treeData[i].getlevel() + ""));
+				childElement.appendChild(LevelElement);*/
 				
 				
-				i++;
+				//i++;
 				
 		
 			}
@@ -141,6 +153,8 @@ public class XMLstructure  {
 			result = new StreamResult(file);
 			trans.transform(doms, result);
 			
+			System.out.println(treeData[0].getData());
+			
 			
 			/*
 			FileOutputStream fop = null;
@@ -162,6 +176,9 @@ public class XMLstructure  {
 			fop.flush();
 			fop.close();*/
 			
+		}
+		catch(NullPointerException e) {
+			e.printStackTrace();
 		}
 		
 			

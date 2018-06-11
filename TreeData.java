@@ -1,4 +1,6 @@
-package userInteface;
+package userInterface;
+
+import userInterface.TreeData;
 
 public abstract class TreeData {
 	private TreeData child;

@@ -1,69 +1,77 @@
-package userInteface;
+package userInterface;
 
 
 import java.util.StringTokenizer;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
+import javax.swing.AbstractButton;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
+import java.awt.Image;
 
 
 public class ButtonEventListener implements ActionListener {
 	private JPanel MindMapPane;
 	private JTextArea Text;
-	private ImageIcon Image;
+	private Image Image;
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
 	//private Color[] labelColor = {Color.PINK, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.MAGENTA};
 	private StringBuffer sb;
 	private String str;
 	private StringTokenizer st;
-	private TreeStructure TS;
+	private static TreeStructure TS;
 	private TreeData newData;
+	private static int count;
 	
-	private TreeData[] treeData;
-	
-	private String xmlString;
+	private static TreeData[] treeData;
 	
 	
-	public ButtonEventListener(JPanel MindMapPane, JTextArea TextArea, ImageIcon Image) {
+	
+	public ButtonEventListener(JPanel MindMapPane, JTextArea TextArea, Image Image) {
 		this.MindMapPane = MindMapPane;
 		this.Text = TextArea;
 		this.Image = Image;
+	
+		
 		//this.treeData = treeData;
 		
 	}
-	//public MapApplyListener(TreeData newData) {
-	//	this.newData = newData;
-	//}
+
+	
 	public void actionPerformed(ActionEvent e) {
-		//String Text = (String)e.getSource();
-		//String Text = TextArea.getText();
+
+		AbstractButton bn = (AbstractButton)e.getSource();
+		String btn = bn.getName();
 		String cmd = e.getActionCommand();
-		//ImageIcon image = (ImageIcon)e.getSource();
-		JButton btn = (JButton)e.getSource();
+		this.command(cmd, btn);
+	}
+	
+	private void command(String cmd, String btn) {
 		
+
 		int k = 0;
 		
-		if (cmd.equals("적용") || btn.getIcon() == Image) {
+	
+		if (cmd.equals("적용") || btn.equals("applyTool")) {
 			if(Text.getText() != "") {
 				MindMapPane.removeAll();
 				MindMapPane.repaint();
 				
 				
+				
 				sb = new StringBuffer(Text.getText());
 				str = sb.toString();
 				st = new StringTokenizer(str, "\n");
-				int count = st.countTokens();
+				count = st.countTokens();
+				//System.out.println(count);
 				TextAreaData = new String[count];
 				TextAreaDataCount = new int[count];
 				
@@ -78,37 +86,44 @@ public class ButtonEventListener implements ActionListener {
 					
 				}
 				TS = new TreeStructure(TextAreaData, TextAreaDataCount);
-				newData = TS.getStart();
+				//treeData = TS.getTreeData();
+				
 				treeData = new TreeData[count];
+				//treeData[0] = TS.getStart();
 				//XMLstructure XMLstr = new XMLstructure(newData);
 				//TreeData newData = TS.start;
+				newData = TS.getStart();
+				
+				
 				
 				while(k < count) {
+					//JLabel la[] = TS.nodeLabel(treeData);
+					//MindMapPane.add(la[k]);
+					
 					
 						MindMapPane.add(TS.nodeLabel(newData));
-						TS.print(newData);
-						/*System.out.println(TextAreaData[k]);
-						System.out.println(TextAreaDataCount[k]);
-						//System.out.println(newData.getlevel());
-						//System.out.println(newData.getData());
-						System.out.println(newData.getX());
-						System.out.println(newData.getY());
-						System.out.println(newData.getWidth());
-						System.out.println(newData.getHeight());*/
+						//TS.print(newData);
+						
 					
 						//XMLstructure XMLstr = new XMLstructure(newData);//XML형식으로 저장하기 위해 미리 save 해놓음
 						//XMLstr.XMLsave();
-						treeData[k] = newData; // XML을 구현하기 위해 TreeData 타입의 배열 생성 및 저장
-						//new MapSaveListener(newData);
-						newData = newData.next;
-						k++;
-					}
-				
+						//treeData[k] = newData;
+						treeData[k] = new NodeLocation();
+						treeData[k] = newData;
 					
+						
+						k++;
+						newData = newData.next;
+					}
+						
+				
 				}
-			}
 			
-			else if(cmd.equals("새로 만들기") || btn.getIcon() == Image) { // 새로만들기를 눌렀을 때
+			System.out.println(treeData[0].getlevel());
+		}
+		
+	
+			 else if(cmd.equals("새로 만들기") || btn.equals("newTool")) { // 새로만들기를 눌렀을 때
 				if(Text.getText() != null) {
 					Text.setText(" ");
 					MindMapPane.removeAll();
@@ -116,69 +131,40 @@ public class ButtonEventListener implements ActionListener {
 				}
 				
 				
-			}
-			
-			else if(cmd.equals("열기") || btn.getIcon() == Image) { // 열기 눌렀을 때
+			 }	
+		
+			else if(cmd.equals("열기") || btn.equals("openTool")) { // 열기 눌렀을 때
 				
 			}
 		
-			else if(cmd.equals("다른 이름으로 저장") || btn.getIcon() == Image) { // 다른 이름으로 저장 눌렀을 때
+			else if(cmd.equals("다른 이름으로 저장") || btn.equals("saveAsTool")) { // 다른 이름으로 저장 눌렀을 때
 				ReturnFilePath fp = new ReturnFilePath();
 				String path = fp.PathReturn();
-				XMLstructure xmlstr = new XMLstructure(treeData, path);
-				xmlstr.XMLsave();
+				new XMLstructure(treeData, path, count);
+				
 			}
+			 
 			
-			if(cmd.equals("저장") || btn.getIcon() == Image) { // 저장 눌렀을 때
-				//FileOutputStream fop = null;
-				//File file;
-				//ReturnFilePath fp = new ReturnFilePath();
-				//String path = fp.PathReturn();
-				XMLstructure xmlstr = new XMLstructure(treeData);
-				xmlstr.XMLsave();
+			else if(cmd.equals("저장") || btn.equals("saveTool")) { // 저장 눌렀을 때
+		
+				new XMLstructure(treeData, "saving", count);
+				
 				JOptionPane.showMessageDialog(null, "저장되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
-				
-				
-				
-				/*try {
-					file = new File(path);
-					fop = new FileOutputStream(file);
-					
-					if(!file.exists()) {
-						file.createNewFile();
-					}
-					
-					byte[] contentInBytes = xmlstr.getXMLString().getBytes();
-					
-					fop.write(contentInBytes);
-					fop.flush();
-					fop.close();
-					
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				*/
 			}
+					
+			else if(cmd.equals("변경") || btn.equals("changeTool")) { // 변경 눌렀을 때
+				
 			
-						
-			else if(cmd.equals("변경") || btn.getIcon() == Image) { // 변경 눌렀을 때
+			}
+		
+			else if(cmd.equals("닫기")){
+				System.exit(0);
 				
 			}
 			else {
-				
+			
 			}
 		
-				
-				
 		}
-	public TreeData[] getTreeData() {
-		return treeData;
-	}
-	//public TreeData getNewData() {
-		//return newData;
-	//}
-	
-		
-	}
-//}
+}
+				

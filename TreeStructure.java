@@ -1,4 +1,4 @@
-package userInteface;
+package userInterface;
 
 
 
@@ -14,8 +14,10 @@ public class TreeStructure {
 	private TreeData lastData = null;
 	private Color[] labelColor = {Color.PINK, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.MAGENTA, Color.white};
 	
+	private TreeData[] treeData;	
 	private int k = 2;
 	private int l = 2;
+	private int a = 0;
 	
 	private int level1 = 1;
 	private int level2 = 1;
@@ -26,14 +28,7 @@ public class TreeStructure {
 	
 	private int[] X1 = {30, 100, 170, 250, 320, 390, 470, 540, 610};
 	private int[] Y1 = {30, 90, 160, 250, 400, 480, 540, 600};
-	private int[] X2 = new int[3];
-	private int[] Y2 = new int[3];
-	private int[] X3 = {};
-	private int[] Y3 = {};
-	private int[] X4 = {};
-	private int[] Y4 = {};
-	private int[] X5 = {};
-	private int[] Y5 = {};
+	
 	
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
@@ -42,6 +37,7 @@ public class TreeStructure {
 	public TreeStructure(String [] TextAreaData, int [] TextAreaDataCount) {
 		this.TextAreaData = TextAreaData;
 		this.TextAreaDataCount = TextAreaDataCount;
+		treeData = new TreeData[TextAreaData.length];
 		//TreeStructureSetting();
 	//}
 		
@@ -116,7 +112,7 @@ public class TreeStructure {
 						break;
 					}
 					
-					
+					treeData[i] = node;
 					last.next = node;
 					last = node;
 				}
@@ -144,8 +140,8 @@ public class TreeStructure {
 	
 	public JLabel nodeLabel(TreeData node) { // 이제 구체적인 위치를 조정하면 될듯. 
 		// nodeLabel 만의 클래스를 만들어서 관리하는게 나을 것 같다.
-		
-		
+		//JLabel[] nodelabel = new JLabel[node.length];
+		//for(int i = 0; i < node.length; i++) {
 		JLabel la = new JLabel(node.getData());
 		
 		//int childCount = node.getParent().
@@ -166,49 +162,9 @@ public class TreeStructure {
 			la.setLocation(node.getX(), node.getY());
 			la.setVisible(true);
 			la.setOpaque(true);//불투명도
-			
-			//return la;
-			
-			}
-		/*else if(node.getlevel() == lastData.getlevel()) { // 현재 노드가 이전 노드의 sibling일 때
-			
-			node.setX(X2[k]);
-			node.setY(Y2[l]);
-			node.setWidth(60);
-			node.setHeight(50);
-			node.setColor(labelColor[node.getlevel()%5].getRGB());
-			
-			la.setSize(node.getWidth(), node.getHeight());
-			la.setBackground(new Color(node.getColor()));
-			la.setLocation(node.getX(), node.getY());
-			la.setVisible(true);
-			la.setOpaque(true);
-					
-				}
-		else if(node.getlevel() == lastData.getlevel() + 1) { // 현재 노드가 이전 노드의 자식일 때
-			
 		}
-		
-		else { // 아무 관련이 없을 때
 			
-		}
-			/*if(node.getlevel() == 1) {
-				node.setX(0);
-				node.setY(0);
-				node.setWidth(70);
-				node.setHeight(50);
-				node.setColor(labelColor[node.getData().lastIndexOf('\t')%5 + 1].getRGB());
-				
-				la.setSize(node.getWidth(), node.getHeight());
-				la.setLocation(node.getX(), node.getY());
-				la.setBackground(new Color(node.getColor()));
-			
-			}
-			la.setSize(60, 40);
-			la.setBackground(labelColor[node.getlevel()%5+1]);
-			la.setLocation(400,400);
-			la.setOpaque(true);*/
-		
+	
 		else {
 			if(node.getlevel() == 1) {
 				switch(node.getOrderLevel()) {
@@ -287,9 +243,11 @@ public class TreeStructure {
 			
 			l--;
 		}
+		//nodelabel[i] = la;
 		
-		lastData = node;
-			
+		
+		//return nodelabel;
+		
 		return la;
 	}
 	void print(TreeData node) {
@@ -303,5 +261,8 @@ public class TreeStructure {
 		System.out.println("OrderLevel : " + node.getOrderLevel());
 		System.out.println("k : " + k + " , l : " + l);
 		System.out.println();
+	}
+	public TreeData[] getTreeData() {
+		return treeData;
 	}
 }
