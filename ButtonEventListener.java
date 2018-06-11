@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 
 import javax.swing.AbstractButton;
-
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -86,28 +86,19 @@ public class ButtonEventListener implements ActionListener {
 					
 				}
 				TS = new TreeStructure(TextAreaData, TextAreaDataCount);
-				//treeData = TS.getTreeData();
-				
+							
 				treeData = new TreeData[count];
-				//treeData[0] = TS.getStart();
-				//XMLstructure XMLstr = new XMLstructure(newData);
-				//TreeData newData = TS.start;
+				
 				newData = TS.getStart();
 				
 				
 				
 				while(k < count) {
-					//JLabel la[] = TS.nodeLabel(treeData);
-					//MindMapPane.add(la[k]);
 					
 					
 						MindMapPane.add(TS.nodeLabel(newData));
 						//TS.print(newData);
-						
-					
-						//XMLstructure XMLstr = new XMLstructure(newData);//XML형식으로 저장하기 위해 미리 save 해놓음
-						//XMLstr.XMLsave();
-						//treeData[k] = newData;
+				
 						treeData[k] = new NodeLocation();
 						treeData[k] = newData;
 					
@@ -119,7 +110,7 @@ public class ButtonEventListener implements ActionListener {
 				
 				}
 			
-			System.out.println(treeData[0].getlevel());
+			//System.out.println(treeData[0].getlevel());
 		}
 		
 	
@@ -129,26 +120,26 @@ public class ButtonEventListener implements ActionListener {
 					MindMapPane.removeAll();
 					MindMapPane.repaint();
 				}
-				
-				
+
 			 }	
 		
 			else if(cmd.equals("열기") || btn.equals("openTool")) { // 열기 눌렀을 때
-				
+			//	openFilePath ofp = new openFilePath();
+			//	String openPath = ofp.PathReturn();
+			//	new XMLOpenStructure(openPath, Text, MindMapPane);
 			}
 		
 			else if(cmd.equals("다른 이름으로 저장") || btn.equals("saveAsTool")) { // 다른 이름으로 저장 눌렀을 때
-				ReturnFilePath fp = new ReturnFilePath();
+				saveFilePath fp = new saveFilePath();
 				String path = fp.PathReturn();
-				new XMLstructure(treeData, path, count);
+				new XMLSaveStructure(treeData, path, count);
 				
 			}
 			 
 			
 			else if(cmd.equals("저장") || btn.equals("saveTool")) { // 저장 눌렀을 때
 		
-				new XMLstructure(treeData, "saving", count);
-				
+				new XMLSaveStructure(treeData, "saving", count);
 				JOptionPane.showMessageDialog(null, "저장되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 			}
 					
@@ -157,14 +148,10 @@ public class ButtonEventListener implements ActionListener {
 			
 			}
 		
-			else if(cmd.equals("닫기")){
+			else if(cmd.equals("닫기") || btn.equals("closeTool")){
 				System.exit(0);
-				
+								
 			}
-			else {
-			
-			}
-		
 		}
-}
+	}
 				

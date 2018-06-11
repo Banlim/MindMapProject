@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="EUC-KR" standalone="no"?>
+<Node>
+    <child>
+        <Data>
+            <Value>호잇</Value>
+            <X>330</X>
+            <Y>330</Y>
+            <Width>80</Width>
+            <Height>50</Height>
+            <Color>-20561</Color>
+            <Level>0</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>	호롤</Value>
+            <X>170</X>
+            <Y>160</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-16711936</Color>
+            <Level>1</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>		랄라</Value>
+            <X>170</X>
+            <Y>90</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-14336</Color>
+            <Level>2</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>	흐엑</Value>
+            <X>390</X>
+            <Y>250</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-16711936</Color>
+            <Level>1</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>		앍</Value>
+            <X>390</X>
+            <Y>160</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-14336</Color>
+            <Level>2</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>	예!</Value>
+            <X>470</X>
+            <Y>250</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-16711936</Color>
+            <Level>1</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>		요!</Value>
+            <X>470</X>
+            <Y>160</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-14336</Color>
+            <Level>2</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>	&#48085;</Value>
+            <X>170</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-16711936</Color>
+            <Level>1</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>		&#48085;&#48085;</Value>
+            <X>170</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-14336</Color>
+            <Level>2</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>			&#48085;&#48085;&#48085;</Value>
+            <X>170</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-256</Color>
+            <Level>3</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>			&#48085;&#48085;&#48085;&#48085;</Value>
+            <X>170</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-256</Color>
+            <Level>3</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>	몽</Value>
+            <X>250</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-16711936</Color>
+            <Level>1</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>		밍</Value>
+            <X>250</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-14336</Color>
+            <Level>2</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>			망</Value>
+            <X>250</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-256</Color>
+            <Level>3</Level>
+        </Data>
+    </child>
+    <child>
+        <Data>
+            <Value>	멩</Value>
+            <X>470</X>
+            <Y>400</Y>
+            <Width>60</Width>
+            <Height>50</Height>
+            <Color>-16711936</Color>
+            <Level>1</Level>
+        </Data>
+    </child>
+</Node>

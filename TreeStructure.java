@@ -5,6 +5,7 @@ package userInterface;
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 public class TreeStructure {
 	private TreeData start = null;
@@ -34,18 +35,18 @@ public class TreeStructure {
 	private int[] TextAreaDataCount;
 //	private int[] NodeChildCount;
 	
-	public TreeStructure(String [] TextAreaData, int [] TextAreaDataCount) {
-		this.TextAreaData = TextAreaData;
+	public TreeStructure(String[] textArea, int [] TextAreaDataCount) {
+		this.TextAreaData = textArea;
 		this.TextAreaDataCount = TextAreaDataCount;
-		treeData = new TreeData[TextAreaData.length];
+		treeData = new TreeData[textArea.length];
 		//TreeStructureSetting();
 	//}
 		
 	//boolean TreeStructureSetting() {	
-		for(int i = 0; i < TextAreaData.length; i++) {
+		for(int i = 0; i < textArea.length; i++) {
 			node = new NodeLocation();
-			node.setData(TextAreaData[i]);
-			if((TextAreaData[0].charAt(0) != '\t') && start == null) {//root 일 때
+			node.setData(textArea[i]);
+			if((textArea[0].charAt(0) != '\t') && start == null) {//root 일 때
 				//start = new NodeLocation();
 				node.setlevel(0);
 				start = node;
@@ -243,12 +244,23 @@ public class TreeStructure {
 			
 			l--;
 		}
-		//nodelabel[i] = la;
-		
-		
-		//return nodelabel;
-		
 		return la;
+	}
+	
+	public JLabel openLabel(TreeData node, int x, int y, int width, int height, int color) {
+		JLabel la = new JLabel(node.getData());
+		
+		node.setX(x);
+		node.setY(y);
+		node.setWidth(width);
+		node.setHeight(height);
+		node.setColor(color);
+		
+		la.setSize(node.getWidth(), node.getHeight());
+		la.setLocation(node.getX(), node.getY());
+		la.setBackground(new Color(color));
+		
+		return la; 
 	}
 	void print(TreeData node) {
 		System.out.println("Data : " + node.getData());

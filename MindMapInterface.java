@@ -38,6 +38,8 @@ public class MindMapInterface extends JFrame{
 	private ImageIcon saveAsToolImage = new ImageIcon("ToolBarIcon\\saveAsIcon.jpg");
 	private ImageIcon applyToolImage = new ImageIcon("ToolBarIcon\\applyIcon.jpg");
 	private ImageIcon changeToolImage = new ImageIcon("ToolBarIcon\\changeIcon.jpg");
+	private ImageIcon CloseToolImage = new ImageIcon("ToolBarIcon\\CloseToolIcon.jpg");
+	
 	
 	private Image newImage = newToolImage.getImage();
 	private Image openImage = openToolImage.getImage();
@@ -45,6 +47,7 @@ public class MindMapInterface extends JFrame{
 	private Image saveAsImage = saveAsToolImage.getImage();
 	private Image applyImage = applyToolImage.getImage();
 	private Image changeImage = changeToolImage.getImage();
+	private Image closeImage = CloseToolImage.getImage();
 	
 	private Icon icon;
 	
@@ -68,7 +71,7 @@ public class MindMapInterface extends JFrame{
 	private ButtonEventListener SaveAsListener = new ButtonEventListener(MindMapPane, TextArea, saveAsImage);
 	private ButtonEventListener openFileListener = new ButtonEventListener(MindMapPane, TextArea, openImage);
 	private ButtonEventListener ChangeListener = new ButtonEventListener(MindMapPane, TextArea, changeImage);
-	
+	private ButtonEventListener CloseListener = new ButtonEventListener(MindMapPane, TextArea, closeImage);
 	
 	
 	private JSplitPane jsp2;
@@ -126,7 +129,7 @@ public class MindMapInterface extends JFrame{
 		}
 		fileItem[0].addActionListener(newFileListener); // 새로 만들기
 		fileItem[1].addActionListener(openFileListener); // 열기
-		//fileItem[2].addActionListener(arg0);
+		fileItem[2].addActionListener(CloseListener);
 		editItem[0].addActionListener(ApplyListener); // 적용
 		editItem[1].addActionListener(ChangeListener); // 변경
 		saveItem[0].addActionListener(SaveListener); // 저장
@@ -210,7 +213,17 @@ public class MindMapInterface extends JFrame{
 		toolBar.add(changeTool);
 		changeTool.setPreferredSize(new Dimension(20, 20));
 		changeTool.setBorderPainted(false);
+		toolBar.addSeparator();
 		
+		
+		JButton closeTool = new JButton();
+		closeTool.setIcon(CloseToolImage);
+		closeTool.setToolTipText("닫기");
+		closeTool.setName("closeTool");
+		closeTool.addActionListener(CloseListener);
+		toolBar.add(closeTool);
+		closeTool.setPreferredSize(new Dimension(20, 20));
+		closeTool.setBorderPainted(false);
 		
 		
 		
