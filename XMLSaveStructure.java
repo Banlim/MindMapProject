@@ -66,7 +66,7 @@ public class XMLSaveStructure  {
 			
 			Element NodeElement = doc.createElement("Node");
 			doc.appendChild(NodeElement);
-			Element ParentElement = null;
+			//Element ParentElement = null;
 			
 		//	TreeData newData = treeData[0];
 			//TreeData last = null;
@@ -75,26 +75,25 @@ public class XMLSaveStructure  {
 				System.out.println("»£¿’");
 				System.out.println(treeData[i].getY());
 				
-				if(treeData[i].getlevel() == 0) {
-					ParentElement = NodeElement;
-				}
+				//if(treeData[i].getlevel() == 0) {
+					//ParentElement = NodeElement;
+				//}
 			
-				else {
+		//		else {
 					//NodeList nodelist = doc.getElementsByTagName(arg0);
-				}
+			//	}
 		
-				Element childElement = doc.createElement("child");
-				ParentElement.appendChild(childElement);
+				
 				
 				Element DataElement = doc.createElement("Data");
-				childElement.appendChild(DataElement);
+				NodeElement.appendChild(DataElement);
 			
 				
-				Element ValueElement = doc.createElement("Value");
+				Node ValueElement = doc.createElement("Value");
 				ValueElement.appendChild(doc.createTextNode(treeData[i].getData()));
 				DataElement.appendChild(ValueElement);
 					
-				Element XElement = doc.createElement("X");
+				Node XElement = doc.createElement("X");
 				XElement.appendChild(doc.createTextNode("" + treeData[i].getX()));
 				DataElement.appendChild(XElement);
 					

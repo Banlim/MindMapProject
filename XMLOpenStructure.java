@@ -24,7 +24,7 @@ public class XMLOpenStructure {
 	private String[] textTree;
 	private JPanel MindMapPane;
 	
-	private int[] Level;
+	private int[] level;
 	private int[] x;
 	private int[] y;
 	private int[] width;
@@ -32,14 +32,17 @@ public class XMLOpenStructure {
 	private int[] color;
 	private TreeData node;
 	
-	private Node nodeItem;
-	private Node Data;
+	//private Node nodeItem;
+	private Element DataItem;
 	private Node Value;
 	private Node X;
 	private Node Y;
 	private Node Width;
 	private Node Height;
 	private Node Color;
+	private Node Level;
+	
+	private int count = 0;
 	
 	private int k = 0;
 	
@@ -60,10 +63,11 @@ public class XMLOpenStructure {
 		doc.getDocumentElement().normalize();
 		
 		Element Node = doc.getDocumentElement();
-		NodeList nodelist = Node.getElementsByTagName("child"); // child 노드 리스트
+		NodeList nodelist = Node.getElementsByTagName("Data"); // Data 노드 리스트
+		//NodeList ValueList
 	
 	
-		Level = new int[nodelist.getLength()];
+		level = new int[nodelist.getLength()];
 		x = new int[nodelist.getLength()];
 		y = new int[nodelist.getLength()];
 		width = new int[nodelist.getLength()];
@@ -72,46 +76,68 @@ public class XMLOpenStructure {
 		
 		for (int i = 0; i < nodelist.getLength(); i++) {
 			
-			nodeItem = nodelist.item(i);
-			Data = nodeItem.getFirstChild();
-			System.out.println(Data.getFirstChild().getNodeValue());
-			Value = Data.getFirstChild();
-			X = Value.getNextSibling();
-			Y = X.getNextSibling();
-			Width = Y.getNextSibling();
-			Height = Width.getNextSibling();
-			Color = Height.getNextSibling();
+			DataItem = (Element) nodelist.item(i);
 			
+			NodeList ValueList = DataItem.getElementsByTagName("Value");
+			NodeList XList = DataItem.getElementsByTagName("X");
+			NodeList YList = DataItem.getElementsByTagName("Y");
+			NodeList WList = DataItem.getElementsByTagName("Width");
+			NodeList HList = DataItem.getElementsByTagName("Height");
+			NodeList ColorList = DataItem.getElementsByTagName("Color");
+			NodeList LevelList = DataItem.getElementsByTagName("Level");
 			
+			Node ValueItem = ValueList.item(0);
+			Value = ValueItem.getFirstChild();
+			
+			Node XItem = XList.item(0);
+			X = XItem.getFirstChild();
+			
+			Node YItem = YList.item(0);
+			Y = YItem.getFirstChild();
+			
+			Node WItem = WList.item(0);
+			Width = WItem.getFirstChild();
+			
+			Node HItem = HList.item(0);
+			Height = HItem.getFirstChild();
+			
+			Node ColorItem = ColorList.item(0);
+			Color = ColorItem.getFirstChild();
+			
+			Node LevelItem = LevelList.item(0);
+			Level = LevelItem.getFirstChild();
+			
+			System.out.println(Value.getNodeValue());
+			System.out.println(X.getNodeValue());
+			System.out.println(Y.getNodeValue());
+			System.out.println(Width.getNodeValue());
+			System.out.println(Height.getNodeValue());
+			System.out.println(Color.getNodeValue());
+			
+			//System.out.println(X.getNodeValue());
 			x[i] = Integer.parseInt(X.getNodeValue());
 			y[i] = Integer.parseInt(Y.getNodeValue());
 			width[i] = Integer.parseInt(Width.getNodeValue());
 			height[i] = Integer.parseInt(Height.getNodeValue());
 			color[i] = Integer.parseInt(Color.getNodeValue());
+			level[i] = Integer.parseInt(Level.getNodeValue());
 			
 			String ValueName = Value.getNodeValue();
 			System.out.println(ValueName);
-			Level[i] = Integer.parseInt(Data.getLastChild().getNodeValue());
-			while(true) {
-				if(Level[i] == 0)
-					break;
-				else {
-					text = text.append('\t'*Level[i]);
-					Level[i] = 0;
-				}
-			}
+			
 			text = text.append(ValueName+ " \n");
-			textTree[i] = text.toString();
-			TextArea.setText(textTree[i]);
-			text = null;
+					
 		}
 		
+		count = nodelist.getLength();
+		
 		//TextArea.setText(textTree[i]);
-		TreeStructure TreeStruc = new TreeStructure(textTree, Level);
+		TreeStructure TreeStruc = new TreeStructure(textTree, level);
 		node = TreeStruc.getStart();
 		while(k < nodelist.getLength()) {
 			JLabel la = TreeStruc.openLabel(node, x[k], y[k], width[k], height[k], color[k]);
 			MindMapPane.add(la);
+			node = node.next;
 			k++;
 		}
 	} 

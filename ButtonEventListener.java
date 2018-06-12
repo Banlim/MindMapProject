@@ -124,9 +124,9 @@ public class ButtonEventListener implements ActionListener {
 			 }	
 		
 			else if(cmd.equals("열기") || btn.equals("openTool")) { // 열기 눌렀을 때
-			//	openFilePath ofp = new openFilePath();
-			//	String openPath = ofp.PathReturn();
-			//	new XMLOpenStructure(openPath, Text, MindMapPane);
+				openFilePath ofp = new openFilePath();
+				String openPath = ofp.PathReturn();
+				new XMLOpenStructure(openPath, Text, MindMapPane);
 			}
 		
 			else if(cmd.equals("다른 이름으로 저장") || btn.equals("saveAsTool")) { // 다른 이름으로 저장 눌렀을 때
