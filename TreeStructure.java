@@ -74,7 +74,7 @@ public class TreeStructure {
 								
 								node.setlevel(TextAreaDataCount[i]);
 								node.setParent(temp.getParent());
-								node.getParent().setChild(node);
+								//node.getParent().setChild(node);
 								node.setSibling(temp);
 								temp = null;
 								break;
@@ -256,9 +256,12 @@ public class TreeStructure {
 		node.setHeight(height);
 		node.setColor(color);
 		
+		la.setText(node.getData());
 		la.setSize(node.getWidth(), node.getHeight());
 		la.setLocation(node.getX(), node.getY());
 		la.setBackground(new Color(color));
+		la.setVisible(true);
+		la.setOpaque(true);
 		
 		return la; 
 	}

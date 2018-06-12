@@ -2,6 +2,7 @@ package userInterface;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,10 +20,13 @@ import org.xml.sax.SAXException;
 public class XMLOpenStructure {
 	
 	private String openFilePath;
+	private String textFinal;
 	private JTextArea TextArea;
-	private StringBuffer text;
+	private StringBuffer text = new StringBuffer();
 	private String[] textTree;
-	private JPanel MindMapPane;
+	private StringTokenizer stz;
+	//private JPanel MindMapPane;
+	private JLabel[] laArr;
 	
 	private int[] level;
 	private int[] x;
@@ -43,13 +47,16 @@ public class XMLOpenStructure {
 	private Node Level;
 	
 	private int count = 0;
-	
+	private int a = 0;
+	private int c = 0;
 	private int k = 0;
 	
-	public XMLOpenStructure(String openFilePath, JTextArea TextArea, JPanel MindMapPane) {
+	//private boolean TF = true;
+	
+	public XMLOpenStructure(String openFilePath, JTextArea TextArea) {
 		this.openFilePath = openFilePath;
 		this.TextArea = TextArea;
-		this.MindMapPane = MindMapPane;
+		//this.MindMapPane = MindMapPane;
 		OpenXML();
 	}
 	
@@ -125,21 +132,31 @@ public class XMLOpenStructure {
 			String ValueName = Value.getNodeValue();
 			System.out.println(ValueName);
 			
-			text = text.append(ValueName+ " \n");
-					
+			text = text.append(ValueName+ "\n");
+			System.out.println(text);
 		}
+		textFinal = text.toString();
+		TextArea.setText(textFinal);
+		stz = new StringTokenizer(textFinal, "\n");
+		textTree = new String[stz.countTokens()];
 		
-		count = nodelist.getLength();
+		while(a < nodelist.getLength()) {
+			textTree[a] = stz.nextToken();
+			a++;
+		}
+			
 		
 		//TextArea.setText(textTree[i]);
-		TreeStructure TreeStruc = new TreeStructure(textTree, level);
+		/*TreeStructure TreeStruc = new TreeStructure(textTree, level);
 		node = TreeStruc.getStart();
-		while(k < nodelist.getLength()) {
-			JLabel la = TreeStruc.openLabel(node, x[k], y[k], width[k], height[k], color[k]);
-			MindMapPane.add(la);
-			node = node.next;
-			k++;
-		}
+		while(c < nodelist.getLength()) {
+			laArr = new JLabel[nodelist.getLength()];
+			laArr[c] = new JLabel();
+			laArr[c] = TreeStruc.openLabel(node, x[c], y[c], width[c], height[c], color[c]);
+			c++;
+		}*/
+		count = stz.countTokens();
+		
 	} 
 	
 		catch (ParserConfigurationException e) {
@@ -154,6 +171,33 @@ public class XMLOpenStructure {
 		}
 		
 		
+	}
+	public JLabel[] getNodeLabel() {
+		return laArr;
+	}
+	public int labelCount() {
+		return count;
+	}
+	public String[] getTextTree() {
+		return textTree;
+	}
+	public int[] getlevelArr() {
+		return level;
+	}
+	public int[] getXArr() {
+		return x;
+	}
+	public int[] getYArr() {
+		return y;
+	}
+	public int[] getWArr() {
+		return width;
+	}
+	public int[] getHArr() {
+		return height;
+	}
+	public int[] getCArr() {
+		return color;
 	}
 
 }

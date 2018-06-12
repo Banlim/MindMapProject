@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -31,7 +32,12 @@ public class ButtonEventListener implements ActionListener {
 	private TreeData newData;
 	private static int count;
 	
+	private static TreeStructure TreeStruc;
+	private TreeData node;
+	private static int openCount;
+	
 	private static TreeData[] treeData;
+	private JLabel[] laArr;
 	
 	
 	
@@ -58,6 +64,7 @@ public class ButtonEventListener implements ActionListener {
 		
 
 		int k = 0;
+		int z = 0;
 		
 	
 		if (cmd.equals("적용") || btn.equals("applyTool")) {
@@ -124,9 +131,46 @@ public class ButtonEventListener implements ActionListener {
 			 }	
 		
 			else if(cmd.equals("열기") || btn.equals("openTool")) { // 열기 눌렀을 때
+				MindMapPane.removeAll();
+				MindMapPane.repaint();
 				openFilePath ofp = new openFilePath();
 				String openPath = ofp.PathReturn();
-				new XMLOpenStructure(openPath, Text, MindMapPane);
+				XMLOpenStructure open = new XMLOpenStructure(openPath, Text);
+				TreeStruc = new TreeStructure(open.getTextTree(), open.getlevelArr());
+				node = TreeStruc.getStart();
+				openCount = open.labelCount();
+				
+				int x[] = new int[open.labelCount()];
+				x = open.getXArr();
+				
+				int y[] = new int[open.labelCount()];
+				y = open.getYArr();
+				
+				int w[] = new int[open.labelCount()];
+				w = open.getWArr();
+				
+				int h[] = new int[open.labelCount()];
+				h = open.getHArr();
+				
+				int color[] = new int[open.labelCount()];
+				color = open.getCArr();
+				
+				while(z < openCount) {
+					
+					MindMapPane.add(TreeStruc.openLabel(node, x[z], y[z], w[z], h[z], color[z]));
+					MindMapPane.setVisible(true);
+					z++;
+					node = node.next;
+				}
+				
+				/*laArr = new JLabel[open.labelCount()];
+				for(int i = 0; i < open.labelCount(); i++) {
+					laArr[i] = new JLabel();
+				}
+				laArr = open.getNodeLabel();
+				for(int i = 0; i < open.labelCount(); i++) {
+					MindMapPane.add(laArr[i]);
+				}*/
 			}
 		
 			else if(cmd.equals("다른 이름으로 저장") || btn.equals("saveAsTool")) { // 다른 이름으로 저장 눌렀을 때
