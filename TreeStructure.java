@@ -5,6 +5,7 @@ package userInterface;
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class TreeStructure {
@@ -14,6 +15,7 @@ public class TreeStructure {
 	private TreeData temp = null;
 	private TreeData lastData = null;
 	private Color[] labelColor = {Color.PINK, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.MAGENTA, Color.white};
+	private JPanel MindMapPane;
 	
 	private TreeData[] treeData;	
 	private int k = 2;
@@ -33,24 +35,19 @@ public class TreeStructure {
 	
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
-//	private int[] NodeChildCount;
+
 	
 	public TreeStructure(String[] textArea, int [] TextAreaDataCount) {
 		this.TextAreaData = textArea;
 		this.TextAreaDataCount = TextAreaDataCount;
 		treeData = new TreeData[textArea.length];
-		//TreeStructureSetting();
-	//}
-		
-	//boolean TreeStructureSetting() {	
+	
 		for(int i = 0; i < textArea.length; i++) {
 			node = new NodeLocation();
 			node.setData(textArea[i]);
 			if((textArea[0].charAt(0) != '\t') && start == null) {//root 일 때
-				//start = new NodeLocation();
 				node.setlevel(0);
 				start = node;
-				//start.setlevel(0);
 				last = start;
 			}
 			else {
@@ -60,7 +57,7 @@ public class TreeStructure {
 						last.setSibling(node);
 						node.setParent(last.getParent());
 						node.setlevel(TextAreaDataCount[i]);
-						//NodeChildCount[i] = NodeChildCount[i];
+						
 					}
 					else if(last.getData().lastIndexOf('\t') + 2 == TextAreaDataCount[i]) { // 앞의 노드가 현재 노드의 parent 일 때
 						node.setParent(last);
@@ -117,35 +114,20 @@ public class TreeStructure {
 					last.next = node;
 					last = node;
 				}
-			//nodeLabel(node);
-			
-			
+		
 			}
-		//for(int j = 0; j < TextAreaData.length; j++) {
-			//switch()
-		//}
-		
-		//return true;
-		//this.start = start;
-		//this.last = last;
-		//this.node = node;
-		
+	
 		}
-	//public TreeData getNode() {
-		//return node;
-	//}
+
 	
 	public TreeData getStart() {
 		return start;
 	}
 	
 	public JLabel nodeLabel(TreeData node) { // 이제 구체적인 위치를 조정하면 될듯. 
-		// nodeLabel 만의 클래스를 만들어서 관리하는게 나을 것 같다.
-		//JLabel[] nodelabel = new JLabel[node.length];
-		//for(int i = 0; i < node.length; i++) {
+
 		JLabel la = new JLabel(node.getData());
 		
-		//int childCount = node.getParent().
 		
 		if(node.getlevel() == 0) { // root 일 때 위치와 넓이, 색깔
 			node.setX(330);
@@ -247,23 +229,20 @@ public class TreeStructure {
 		return la;
 	}
 	
-	public JLabel openLabel(TreeData node, int x, int y, int width, int height, int color) {
-		JLabel la = new JLabel(node.getData());
+	public JLabel openLabel(TreeData node) {
 		
-		node.setX(x);
-		node.setY(y);
-		node.setWidth(width);
-		node.setHeight(height);
-		node.setColor(color);
+		JLabel lb = new JLabel(node.getData());
+			
+		lb.setText(node.getData());
+		lb.setSize(node.getWidth(), node.getHeight());
+		lb.setLocation(node.getX(), node.getY());
+		lb.setBackground(new Color(node.getColor()));
+		lb.setVisible(true);
+		lb.setOpaque(true);
+	
 		
-		la.setText(node.getData());
-		la.setSize(node.getWidth(), node.getHeight());
-		la.setLocation(node.getX(), node.getY());
-		la.setBackground(new Color(color));
-		la.setVisible(true);
-		la.setOpaque(true);
 		
-		return la; 
+		return lb; 
 	}
 	void print(TreeData node) {
 		System.out.println("Data : " + node.getData());

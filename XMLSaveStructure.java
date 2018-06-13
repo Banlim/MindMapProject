@@ -27,31 +27,23 @@ import org.w3c.dom.NodeList;
 
 public class XMLSaveStructure  {
 	
-	
 	private TreeData[] treeData;
-	
 	private StreamResult result;
 	private String xmlString;
 	private String returnPath;
 	private int count;
-	//private TreeData a;
+	
 	
 
 	public XMLSaveStructure(TreeData[] tree, String returnPath, int count) {
-		//this.newData = newData;
-	
+		
 		this.treeData = tree;
 		this.returnPath = returnPath + ".xml";
 		this.count = count;
-		//treeData = MapApplyListener.getTreeData();
 		XMLsave();
 		
 	}
-	
-		
-		
-	
-	
+
 	private void XMLsave() {
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -60,30 +52,12 @@ public class XMLSaveStructure  {
 			org.w3c.dom.Document doc = docBuilder.newDocument();
 			System.out.println("Àü´Þ!");
 			System.out.println(treeData[0].getX());
-			
-			//boolean TF = true;
-			//int i = 0;
-			
+		
 			Element NodeElement = doc.createElement("Node");
 			doc.appendChild(NodeElement);
-			//Element ParentElement = null;
-			
-		//	TreeData newData = treeData[0];
-			//TreeData last = null;
-			
-			for(int i = 0; i < count; i++) {
-				System.out.println("È£ÀÕ");
-				System.out.println(treeData[i].getY());
-				
-				//if(treeData[i].getlevel() == 0) {
-					//ParentElement = NodeElement;
-				//}
-			
-		//		else {
-					//NodeList nodelist = doc.getElementsByTagName(arg0);
-			//	}
-		
-				
+
+
+				for(int i = 0; i < treeData.length; i++) {
 				
 				Element DataElement = doc.createElement("Data");
 				NodeElement.appendChild(DataElement);
@@ -108,9 +82,9 @@ public class XMLSaveStructure  {
 				Element HeightElement = doc.createElement("Height");
 				HeightElement.appendChild(doc.createTextNode("" + treeData[i].getHeight()));
 				DataElement.appendChild(HeightElement);
-					
+				
 				Element ColorElement = doc.createElement("Color");
-				ColorElement.appendChild(doc.createTextNode("" + treeData[i].getColor()));
+				ColorElement.appendChild(doc.createTextNode("" + treeData[i].getHeight()));
 				DataElement.appendChild(ColorElement);
 				
 				Element LevelElement = doc.createElement("Level");
@@ -128,79 +102,28 @@ public class XMLSaveStructure  {
 			trans.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource doms = new DOMSource(doc);
 			
-			//FileOutputStream fop = null;
 			File file;
 			
 			file = new File(returnPath);
-			//fop = new FileOutputStream(file);
-			
-			//result = new StreamResult(new StringWriter());
+		
 			result = new StreamResult(file);
 			trans.transform(doms, result);
-			
-			System.out.println(treeData[0].getData());
-			
-			
-			/*
-			FileOutputStream fop = null;
-			File file;
-			
-			file = new File(returnPath);
-			fop = new FileOutputStream(file);
-			
-			if(!file.exists()) {
-				file.createNewFile();
-			}
-				
-			
-			xmlString = result.getWriter().toString();
-			byte[] contentInBytes = new byte[xmlString.getBytes().length];
-			contentInBytes = xmlString.getBytes();
-			
-			fop.write(contentInBytes);
-			fop.flush();
-			fop.close();*/
+		
 			
 		}
 		catch(NullPointerException e) {
 			e.printStackTrace();
 		}
-		
-			
-		
-		
-		//return result.getWriter().toString().trim();
+
 		catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		//}
-		//catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		//}
+
 		catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-		
-		
-
-	public StreamResult getResult() {
-		return result;
-	}
-	
-	public String getXMLString() {
-		return xmlString;
-	}
-	
-	
-	
-	
 
 }

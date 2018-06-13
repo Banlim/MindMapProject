@@ -49,7 +49,7 @@ public class MindMapInterface extends JFrame{
 	private Image changeImage = changeToolImage.getImage();
 	private Image closeImage = CloseToolImage.getImage();
 	
-	private Icon icon;
+	
 	
 	
 	
@@ -80,14 +80,13 @@ public class MindMapInterface extends JFrame{
 	public MindMapInterface() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(LayoutWidth, LayoutHeight);
+		setTitle("MindMap - Application");
 		contentPane = getContentPane();
 		createMenu();
 		createTool();
 		SetTextEditorPane();
 		MindMapPane();
 		SetAttributePane();
-		
-		
 		
 		
 		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane, MindMapPane);
@@ -127,6 +126,14 @@ public class MindMapInterface extends JFrame{
 			saveMenu.add(saveItem[i]);
 			saveMenu.addSeparator();
 		}
+		fileItem[0].setName("new");
+		fileItem[1].setName("open");
+		fileItem[2].setName("close");
+		editItem[0].setName("apply");
+		editItem[1].setName("change");
+		saveItem[0].setName("save");
+		saveItem[1].setName("saveAs");
+		
 		fileItem[0].addActionListener(newFileListener); // 새로 만들기
 		fileItem[1].addActionListener(openFileListener); // 열기
 		fileItem[2].addActionListener(CloseListener);
@@ -156,7 +163,7 @@ public class MindMapInterface extends JFrame{
 		JButton newTool = new JButton();
 		newTool.setIcon(newToolImage);
 		newTool.setToolTipText("새로 만들기");
-		newTool.setName("newTool");
+		newTool.setName("new");
 		newTool.addActionListener(newFileListener);
 		toolBar.add(newTool);
 		newTool.setPreferredSize(new Dimension(20, 20));
@@ -166,7 +173,7 @@ public class MindMapInterface extends JFrame{
 		JButton openTool = new JButton();
 		openTool.setIcon(openToolImage);
 		openTool.setToolTipText("열기");
-		openTool.setName("openTool");
+		openTool.setName("open");
 		openTool.addActionListener(openFileListener);
 		toolBar.add(openTool);
 		openTool.setPreferredSize(new Dimension(20, 20));
@@ -176,7 +183,7 @@ public class MindMapInterface extends JFrame{
 		JButton saveTool = new JButton();
 		saveTool.setIcon(saveToolImage);
 		//saveTool.setText("저장");
-		saveTool.setName("saveTool");
+		saveTool.setName("save");
 		saveTool.setToolTipText("저장");
 		saveTool.addActionListener(SaveListener);
 		toolBar.add(saveTool);
@@ -187,7 +194,7 @@ public class MindMapInterface extends JFrame{
 		JButton saveAsTool = new JButton();
 		saveAsTool.setIcon(saveAsToolImage);
 		saveAsTool.setToolTipText("다른 이름으로 저장");
-		saveAsTool.setName("saveAsTool");
+		saveAsTool.setName("saveAs");
 		saveAsTool.addActionListener(SaveAsListener);
 		toolBar.add(saveAsTool);
 		saveAsTool.setPreferredSize(new Dimension(20, 20));
@@ -197,7 +204,7 @@ public class MindMapInterface extends JFrame{
 		JButton applyTool = new JButton();
 		applyTool.setIcon(applyToolImage);
 		applyTool.setToolTipText("적용");
-		applyTool.setName("applyTool");
+		applyTool.setName("apply");
 		applyTool.addActionListener(ApplyListener);
 		toolBar.add(applyTool);
 		applyTool.setPreferredSize(new Dimension(20, 20));
@@ -208,7 +215,7 @@ public class MindMapInterface extends JFrame{
 		JButton changeTool = new JButton();
 		changeTool.setIcon(changeToolImage);
 		changeTool.setToolTipText("변경");
-		changeTool.setName("changeTool");
+		changeTool.setName("change");
 		changeTool.addActionListener(ChangeListener);
 		toolBar.add(changeTool);
 		changeTool.setPreferredSize(new Dimension(20, 20));
@@ -219,7 +226,7 @@ public class MindMapInterface extends JFrame{
 		JButton closeTool = new JButton();
 		closeTool.setIcon(CloseToolImage);
 		closeTool.setToolTipText("닫기");
-		closeTool.setName("closeTool");
+		closeTool.setName("close");
 		closeTool.addActionListener(CloseListener);
 		toolBar.add(closeTool);
 		closeTool.setPreferredSize(new Dimension(20, 20));
@@ -287,6 +294,7 @@ public class MindMapInterface extends JFrame{
 		
 		AttributePane.add(middlePanel, BorderLayout.CENTER);
 		JButton ChangeNode=new JButton("변경");
+		ChangeNode.setName("change");
 		AttributePane.add(ChangeNode,BorderLayout.SOUTH);
 		ChangeNode.addActionListener(ChangeListener);
 		
@@ -298,6 +306,7 @@ public class MindMapInterface extends JFrame{
 		JLabel name= new JLabel("Text Editor Pane");
 		TextEditorPane.add(name, BorderLayout.NORTH);
 		JButton ApplyButton= new JButton("적용");
+		ApplyButton.setName("apply");
 		TextEditorPane.add(ApplyButton, BorderLayout.SOUTH);
 		JScrollPane TextScrollPane= new JScrollPane(TextArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		TextEditorPane.add(TextScrollPane);

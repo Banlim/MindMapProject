@@ -51,5 +51,13 @@ class NodeLocation extends TreeData { // 한 노드에 대한 정보 클래스
 	public void setColor(int color) {
 		this.color = color;
 	}
+	public String HexColor(int color) {
+		String hexColor = Integer.toHexString(color & 0xffffff);
+		if(hexColor.length() < 6) {
+			hexColor = "000000".substring(0, 6 - hexColor.length()) + hexColor;
+		}
+		return "0x" + hexColor;
+		
+	}
 
 }

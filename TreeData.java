@@ -21,6 +21,7 @@ public abstract class TreeData {
 	abstract void setHeight(int height);
 	abstract int getColor();
 	abstract void setColor(int color);
+	abstract String HexColor(int color);
 	
 	public TreeData() {
 		this.data = null;

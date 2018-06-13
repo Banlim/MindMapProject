@@ -25,8 +25,9 @@ public class XMLOpenStructure {
 	private StringBuffer text = new StringBuffer();
 	private String[] textTree;
 	private StringTokenizer stz;
-	//private JPanel MindMapPane;
+	
 	private JLabel[] laArr;
+	private JLabel label = new JLabel();
 	
 	private int[] level;
 	private int[] x;
@@ -35,8 +36,9 @@ public class XMLOpenStructure {
 	private int[] height;
 	private int[] color;
 	private TreeData node;
+	private TreeStructure TreeStruc;
 	
-	//private Node nodeItem;
+	
 	private Element DataItem;
 	private Node Value;
 	private Node X;
@@ -46,17 +48,16 @@ public class XMLOpenStructure {
 	private Node Color;
 	private Node Level;
 	
-	private int count = 0;
+	private int count;
 	private int a = 0;
 	private int c = 0;
 	private int k = 0;
 	
-	//private boolean TF = true;
+
 	
 	public XMLOpenStructure(String openFilePath, JTextArea TextArea) {
 		this.openFilePath = openFilePath;
 		this.TextArea = TextArea;
-		//this.MindMapPane = MindMapPane;
 		OpenXML();
 	}
 	
@@ -71,7 +72,7 @@ public class XMLOpenStructure {
 		
 		Element Node = doc.getDocumentElement();
 		NodeList nodelist = Node.getElementsByTagName("Data"); // Data 노드 리스트
-		//NodeList ValueList
+		
 	
 	
 		level = new int[nodelist.getLength()];
@@ -114,14 +115,7 @@ public class XMLOpenStructure {
 			Node LevelItem = LevelList.item(0);
 			Level = LevelItem.getFirstChild();
 			
-			System.out.println(Value.getNodeValue());
-			System.out.println(X.getNodeValue());
-			System.out.println(Y.getNodeValue());
-			System.out.println(Width.getNodeValue());
-			System.out.println(Height.getNodeValue());
-			System.out.println(Color.getNodeValue());
 			
-			//System.out.println(X.getNodeValue());
 			x[i] = Integer.parseInt(X.getNodeValue());
 			y[i] = Integer.parseInt(Y.getNodeValue());
 			width[i] = Integer.parseInt(Width.getNodeValue());
@@ -130,31 +124,24 @@ public class XMLOpenStructure {
 			level[i] = Integer.parseInt(Level.getNodeValue());
 			
 			String ValueName = Value.getNodeValue();
-			System.out.println(ValueName);
+			
 			
 			text = text.append(ValueName+ "\n");
-			System.out.println(text);
+		
 		}
 		textFinal = text.toString();
 		TextArea.setText(textFinal);
 		stz = new StringTokenizer(textFinal, "\n");
 		textTree = new String[stz.countTokens()];
 		
+		
+		
 		while(a < nodelist.getLength()) {
 			textTree[a] = stz.nextToken();
+		
 			a++;
 		}
-			
-		
-		//TextArea.setText(textTree[i]);
-		/*TreeStructure TreeStruc = new TreeStructure(textTree, level);
-		node = TreeStruc.getStart();
-		while(c < nodelist.getLength()) {
-			laArr = new JLabel[nodelist.getLength()];
-			laArr[c] = new JLabel();
-			laArr[c] = TreeStruc.openLabel(node, x[c], y[c], width[c], height[c], color[c]);
-			c++;
-		}*/
+	
 		count = stz.countTokens();
 		
 	} 

@@ -5,8 +5,9 @@ import java.util.StringTokenizer;
 
 
 import javax.swing.AbstractButton;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -14,7 +15,7 @@ import javax.swing.JTextArea;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.Color;
 import java.awt.Image;
 
 
@@ -28,16 +29,16 @@ public class ButtonEventListener implements ActionListener {
 	private StringBuffer sb;
 	private String str;
 	private StringTokenizer st;
-	private static TreeStructure TS;
+	private TreeStructure TS;
 	private TreeData newData;
 	private static int count;
 	
-	private static TreeStructure TreeStruc;
+	private TreeStructure TreeStruc;
 	private TreeData node;
-	private static int openCount;
+
 	
 	private static TreeData[] treeData;
-	private JLabel[] laArr;
+
 	
 	
 	
@@ -45,10 +46,7 @@ public class ButtonEventListener implements ActionListener {
 		this.MindMapPane = MindMapPane;
 		this.Text = TextArea;
 		this.Image = Image;
-	
-		
-		//this.treeData = treeData;
-		
+
 	}
 
 	
@@ -56,39 +54,34 @@ public class ButtonEventListener implements ActionListener {
 
 		AbstractButton bn = (AbstractButton)e.getSource();
 		String btn = bn.getName();
-		String cmd = e.getActionCommand();
-		this.command(cmd, btn);
+		this.command( btn);
 	}
 	
-	private void command(String cmd, String btn) {
+	private void command( String btn) {
 		
 
 		int k = 0;
 		int z = 0;
 		
 	
-		if (cmd.equals("적용") || btn.equals("applyTool")) {
+		if (btn.equals("apply")) {
 			if(Text.getText() != "") {
 				MindMapPane.removeAll();
 				MindMapPane.repaint();
-				
 				
 				
 				sb = new StringBuffer(Text.getText());
 				str = sb.toString();
 				st = new StringTokenizer(str, "\n");
 				count = st.countTokens();
-				//System.out.println(count);
+				
 				TextAreaData = new String[count];
 				TextAreaDataCount = new int[count];
 				
 					
 				for (int i = 0; i < count; i++) {
 					TextAreaData[i] = st.nextToken();
-					/*if(i==0) {
-						TextAreaDataCount[i] = 0;
-						continue;
-					}*/
+					
 					TextAreaDataCount[i] = TextAreaData[i].lastIndexOf('\t')+1; // 각 노드의 '\t'의 개수를 배열로 저장, 나중에 level로 쓰임
 					
 				}
@@ -98,30 +91,21 @@ public class ButtonEventListener implements ActionListener {
 				
 				newData = TS.getStart();
 				
-				
-				
+		
 				while(k < count) {
-					
-					
 						MindMapPane.add(TS.nodeLabel(newData));
-						//TS.print(newData);
-				
+						
 						treeData[k] = new NodeLocation();
 						treeData[k] = newData;
 					
-						
 						k++;
 						newData = newData.next;
 					}
-						
-				
 				}
-			
-			//System.out.println(treeData[0].getlevel());
 		}
 		
 	
-			 else if(cmd.equals("새로 만들기") || btn.equals("newTool")) { // 새로만들기를 눌렀을 때
+			 else if(btn.equals("new")) { // 새로만들기를 눌렀을 때
 				if(Text.getText() != null) {
 					Text.setText(" ");
 					MindMapPane.removeAll();
@@ -130,7 +114,7 @@ public class ButtonEventListener implements ActionListener {
 
 			 }	
 		
-			else if(cmd.equals("열기") || btn.equals("openTool")) { // 열기 눌렀을 때
+			else if(btn.equals("open")) { // 열기 눌렀을 때
 				MindMapPane.removeAll();
 				MindMapPane.repaint();
 				openFilePath ofp = new openFilePath();
@@ -138,7 +122,6 @@ public class ButtonEventListener implements ActionListener {
 				XMLOpenStructure open = new XMLOpenStructure(openPath, Text);
 				TreeStruc = new TreeStructure(open.getTextTree(), open.getlevelArr());
 				node = TreeStruc.getStart();
-				openCount = open.labelCount();
 				
 				int x[] = new int[open.labelCount()];
 				x = open.getXArr();
@@ -155,25 +138,30 @@ public class ButtonEventListener implements ActionListener {
 				int color[] = new int[open.labelCount()];
 				color = open.getCArr();
 				
-				while(z < openCount) {
+				
+			
+				while(z < x.length) {
+					JLabel lb = new JLabel(node.getData());
+					node.setX(x[z]);
+					node.setY(y[z]);
+					node.setWidth(w[z]);
+					node.setHeight(h[z]);
+					node.setColor(color[z]);
 					
-					MindMapPane.add(TreeStruc.openLabel(node, x[z], y[z], w[z], h[z], color[z]));
-					MindMapPane.setVisible(true);
-					z++;
+					lb.setSize(node.getWidth(), node.getHeight());
+					lb.setLocation(node.getX(), node.getY());
+					lb.setBackground(new Color(node.getColor()));
+					lb.setOpaque(true);
+					lb.setVisible(true);
+					
+					MindMapPane.add(lb);
 					node = node.next;
+					z++;
 				}
 				
-				/*laArr = new JLabel[open.labelCount()];
-				for(int i = 0; i < open.labelCount(); i++) {
-					laArr[i] = new JLabel();
-				}
-				laArr = open.getNodeLabel();
-				for(int i = 0; i < open.labelCount(); i++) {
-					MindMapPane.add(laArr[i]);
-				}*/
 			}
 		
-			else if(cmd.equals("다른 이름으로 저장") || btn.equals("saveAsTool")) { // 다른 이름으로 저장 눌렀을 때
+			else if(btn.equals("saveAs")) { // 다른 이름으로 저장 눌렀을 때
 				saveFilePath fp = new saveFilePath();
 				String path = fp.PathReturn();
 				new XMLSaveStructure(treeData, path, count);
@@ -181,18 +169,18 @@ public class ButtonEventListener implements ActionListener {
 			}
 			 
 			
-			else if(cmd.equals("저장") || btn.equals("saveTool")) { // 저장 눌렀을 때
+			else if( btn.equals("save")) { // 저장 눌렀을 때
 		
 				new XMLSaveStructure(treeData, "saving", count);
 				JOptionPane.showMessageDialog(null, "저장되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
 			}
 					
-			else if(cmd.equals("변경") || btn.equals("changeTool")) { // 변경 눌렀을 때
+			else if(btn.equals("change")) { // 변경 눌렀을 때
 				
 			
 			}
 		
-			else if(cmd.equals("닫기") || btn.equals("closeTool")){
+			else if(btn.equals("close")){
 				System.exit(0);
 								
 			}
