@@ -1,13 +1,13 @@
 package userInterface;
 
-import userInterface.TreeData;
 
 public abstract class TreeData {
-	private TreeData child;
+	private TreeData[] child=new TreeData[10];
 	private TreeData parent;
 	private TreeData sibling;
 	private int level;
-	private int orderLevel; // 현재 레벨이 몇 번째로 나왔는지?
+	private int childNum; //자식 노드의 개수
+	private int orderNum; // 자신의 부모 아래에서 현재 레벨(sibling과 자신)이 몇 번째로 나왔는지(1번째부터 시작)
 	protected String data;
 	TreeData next;
 	
@@ -25,18 +25,19 @@ public abstract class TreeData {
 	
 	public TreeData() {
 		this.data = null;
-		this.child = null;
+		this.child[0] = null;
 		this.parent = null;
 		this.sibling = null;
 		this.level = 0;
-		this.orderLevel = 0;
+		this.childNum = 0;
+		this.orderNum = 0;
 		this.next = null;
 	}
-	public void setChild(TreeData newData) {
-		this.child = newData;
+	public void setChild(TreeData newData,int i) {
+		this.child[i] = newData;
 	}
-	public TreeData getChild() {
-		return child;
+	public TreeData getChild(int i) {
+		return child[i];
 	}
 	public void setParent(TreeData newData) {
 		this.parent = newData;
@@ -56,17 +57,23 @@ public abstract class TreeData {
 	public int getlevel() {
 		return level;
 	}
+	public void setChildNum(int childNum) {
+		this.childNum = childNum;
+	}
+	public int getChildNum() {
+		return childNum;
+	}
+	public void setOrderNum(int newOrderNum) {
+		this.orderNum = newOrderNum;
+	}
+	public int getOrderNum() {
+		return orderNum;
+	}
 	public void setData(String newData) {
 		this.data = newData;
 	}
 	public String getData() {
 		return data;
-	}
-	public void setOrderLevel(int newOrderLevel) {
-		this.orderLevel = newOrderLevel;
-	}
-	public int getOrderLevel() {
-		return orderLevel;
 	}
 	
 }
