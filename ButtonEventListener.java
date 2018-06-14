@@ -5,22 +5,25 @@ import java.util.StringTokenizer;
 
 
 import javax.swing.AbstractButton;
+
 import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import userInterface.TreeStructure;
-import userInterface.NodeLocation;
-import userInterface.TreeData;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import userInterface.NodeLocation;
+import userInterface.TreeStructure;
+import userInterface.TreeData;
 
 
 public class ButtonEventListener implements ActionListener {
@@ -36,8 +39,11 @@ public class ButtonEventListener implements ActionListener {
 	private TreeStructure TS;
 	private TreeData newData;
 	private static int count;
-	private int opennum=0;
+	private int opennum = 0;
 	private String openstr;
+	
+	private TreeStructure TreeStruc;
+	private TreeData node;
 	
 	JLabel la;
 	static JTextField NameValue;
@@ -47,11 +53,9 @@ public class ButtonEventListener implements ActionListener {
 	static JTextField HeightValue;
 	static JTextField ColorValue;
 
-	private TreeStructure TreeStruc;
-	private TreeData node;
-
 	
 	private static TreeData[] treeData;
+
 	
 	
 	
@@ -59,8 +63,7 @@ public class ButtonEventListener implements ActionListener {
 		this.MindMapPane = MindMapPane;
 		this.Text = TextArea;
 		this.Image = Image;
-	
-		
+
 	}
 
 	
@@ -68,16 +71,14 @@ public class ButtonEventListener implements ActionListener {
 
 		AbstractButton bn = (AbstractButton)e.getSource();
 		String btn = bn.getName();
-		this.command(btn);
+		this.command( btn);
 	}
-	
 	
 	private void command( String btn) {
 		
 
 		int k = 0;
 		int z = 0;
-	
 		
 	
 		if (btn.equals("apply")) {
@@ -122,7 +123,8 @@ public class ButtonEventListener implements ActionListener {
 		
 	
 			 else if(btn.equals("new")) { // 새로만들기를 눌렀을 때
-				if(opennum==0) {
+				if(opennum == 0) {
+					
 					Text.setText(" ");
 					MindMapPane.removeAll();
 					MindMapPane.repaint();
@@ -131,13 +133,12 @@ public class ButtonEventListener implements ActionListener {
 					Text.setText(openstr);
 					MindMapPane.removeAll();
 					MindMapPane.repaint();
-					
 				}
 
 			 }	
 		
 			else if(btn.equals("open")) { // 열기 눌렀을 때
-				opennum+=1;
+				opennum += 1;
 				MindMapPane.removeAll();
 				MindMapPane.repaint();
 				openFilePath ofp = new openFilePath();
@@ -200,16 +201,20 @@ public class ButtonEventListener implements ActionListener {
 					
 			else if(btn.equals("change")) { // 변경 눌렀을 때
 				MouseEventListener.Change();
+				
 			
 			}
 		
 			else if(btn.equals("close")){
+				int result = JOptionPane.showConfirmDialog(null, "종료하시겠습니까?", "닫기 Message", JOptionPane.YES_NO_OPTION);
+				if(result == JOptionPane.CLOSED_OPTION || result == JOptionPane.NO_OPTION) {
+					return;
+				}
+				else {
 				System.exit(0);
+				}
 								
 			}
 		}
-
-
-	
 	}
 				
