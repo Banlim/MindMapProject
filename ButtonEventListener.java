@@ -201,8 +201,7 @@ public class ButtonEventListener implements ActionListener {
 					
 			else if(btn.equals("change")) { // 변경 눌렀을 때
 				MouseEventListener.Change();
-				
-			
+	
 			}
 		
 			else if(btn.equals("close")){

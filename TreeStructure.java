@@ -2,16 +2,12 @@ package userInterface;
 
 
 
-
 import java.awt.Color;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
-import userInterface.NodeLocation;
-import userInterface.TreeData;
-
 
 public class TreeStructure {
 	private TreeData start = null;
@@ -21,7 +17,7 @@ public class TreeStructure {
 	private TreeData lastData = null;
 	private Color[] labelColor = {Color.PINK, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.MAGENTA, Color.white};
 	private JPanel MindMapPane;
-
+	
 	private TreeData[] treeData;	
 	private int k = 2;
 	private int l = 2;
@@ -36,18 +32,17 @@ public class TreeStructure {
 	
 	private int[] X1 = {20, 90, 210, 330, 450, 570, 650};
 	private int[] Y1 = {30, 130, 230, 330, 430, 530, 630};
-
+	
 	
 	private String[] TextAreaData;
 	private int[] TextAreaDataCount;
 
-	//private MouseEventListener LableMouseEventListener = new MouseEventListener(MouseEventListener.NameValue,MouseEventListener.XValue,MouseEventListener.YValue,MouseEventListener.WidthValue,MouseEventListener.HeightValue,MouseEventListener.ColorValue);
 	
-	public TreeStructure(String [] textArea, int [] TextAreaDataCount) {
+	public TreeStructure(String[] textArea, int [] TextAreaDataCount) {
 		this.TextAreaData = textArea;
 		this.TextAreaDataCount = TextAreaDataCount;
 		treeData = new TreeData[textArea.length];
-		
+	
 		for(int i = 0; i < textArea.length; i++) {
 			node = new NodeLocation();
 			node.setData(textArea[i]);
@@ -58,7 +53,7 @@ public class TreeStructure {
 			}
 			else {
 				
-				
+					
 					if(last.getData().lastIndexOf('\t')+1 == TextAreaDataCount[i]) { //앞의 노드와 지금 현재 노드가 같은 계층일 때
 						last.setSibling(node);
 						node.setParent(last.getParent());
@@ -67,10 +62,9 @@ public class TreeStructure {
 						node.setOrderNum(last.getOrderNum()+1);
 						
 					}
-				
 					else if(last.getData().lastIndexOf('\t') + 2 == TextAreaDataCount[i]) { // 앞의 노드가 현재 노드의 parent 일 때
 						node.setParent(last);
-						last.setChild(node,0);
+						last.setChild(node, 0);
 						node.setlevel(TextAreaDataCount[i]);
 						last.setChildNum(last.getChildNum()+1);
 						node.setOrderNum(1);
@@ -83,11 +77,10 @@ public class TreeStructure {
 								node.setlevel(TextAreaDataCount[i]);
 								node.setParent(temp.getParent());
 								//node.getParent().setChild(node);
-								node.getParent().setChild(node,node.getParent().getChildNum()+1);
+								node.getParent().setChild(node, node.getParent().getChildNum()+1);
 								node.getParent().setChildNum(node.getParent().getChildNum()+1);
 								node.getParent().setOrderNum(node.getParent().getChildNum());
 								node.setSibling(temp);
-								
 								temp = null;
 								break;
 							}
@@ -125,102 +118,78 @@ public class TreeStructure {
 						break;
 					}
 					
-					
 					treeData[i] = node;
 					last.next = node;
 					last = node;
 				}
-			
-			}
 		
+			}
+	
 		}
 
+	
 	public TreeData getStart() {
 		return start;
 	}
 	
 	public JLabel nodeLabel(TreeData node) { // 이제 구체적인 위치를 조정하면 될듯. 
-		
+
 		JLabel la = new JLabel(node.getData());
-		la.addMouseListener(new MouseEventListener(MouseEventListener.NameValue,MouseEventListener.XValue,MouseEventListener.YValue,MouseEventListener.WidthValue,MouseEventListener.HeightValue,MouseEventListener.ColorValue));
+		la.addMouseListener(new MouseEventListener(MouseEventListener.NameValue, MouseEventListener.XValue, MouseEventListener.YValue, MouseEventListener.WidthValue, MouseEventListener.HeightValue, MouseEventListener.ColorValue));
 		la.setHorizontalAlignment(SwingConstants.CENTER);
-		la.setVerticalTextPosition(SwingConstants.CENTER);
-		
+		la.setVerticalAlignment(SwingConstants.CENTER);
 		
 		if(node.getlevel() == 0) { // root 일 때 위치와 넓이, 색깔
 			node.setX(330);
 			node.setY(330);
 			node.setWidth(80);
 			node.setHeight(50);
-			
+						
 			node.setColor(labelColor[node.getlevel() % 5].getRGB());
 			// 속성페인에 들어갈 변수들 설정
-			
-			
 		
 			la.setSize(node.getWidth(), node.getHeight());
 			la.setBackground(new Color(node.getColor()));
 			la.setLocation(node.getX(), node.getY());
 			la.setVisible(true);
 			la.setOpaque(true);//불투명도
+		}
 			
-			
-			}
-		
-		
+	
 		else {
 			if(node.getlevel() == 1) {
 				switch(node.getOrderNum()) {
-				//private int[] X1 = {20, 90, 210, 330, 450, 570, 650};
-				//private int[] Y1 = {30, 130, 230, 330, 430, 530, 630};
 				case 1 :
-						k = 3;
-						l = 3;
-					
-
+					k = 3;
+					l = 3;
 					break;
 				case 2 :
-						k = 3;
-						l = 5;
-					
-					
+					k = 3;
+					l = 5;
 					break;
 				case 3 :
-					k = 5;
+					k =5;
 					l = 5;
-					
-					
 					break;
 				case 4 :
 					k = 5;
 					l = 3;
-					
-					
 					break;
 				case 5 : 
 					k = 4;
 					l = 2;
-					
-					
 					break;
 				case 6 :
 					k = 2;
 					l = 4;
-					
-					
 					break;
-				case 7 : 
+				case 7 :
 					k = 4;
 					l = 6;
-					
-					
 					break;
 				case 8 :
 					k = 6;
 					l = 4;
-					
-					
-					
 					break;
 				default :
 					break;
@@ -229,107 +198,88 @@ public class TreeStructure {
 			}
 			else if(node.getlevel() == 2) {
 				switch(node.getOrderNum()) {
-			
-				//private int[] X2 = {40,140, 160,260, 280,380, 400,500, 520,570};
-				//private int[] Y2 = {80,180, 180,280, 280,380, 380,480, 480,580};
 				case 1 :
-					if(node.getX()<X1[4]&&node.getY()<Y1[4]) {  // 2사분면
+					if(node.getX() < X1[4] && node.getY() < Y1[4]) { // 2사분면
 						k = 3;
 						l = 3;
+					}
+					else if(node.getX() < X1[4] && node.getY() > Y1[4]) {
 						
 					}
-					
-					else if(node.getX()<X1[4]&&node.getY()>Y1[4]) { // 3사분면
-						
+					else if(node.getX() > X1[4] && node.getY() > Y1[4]) {
 						
 					}
-					
-					else if(node.getX()>X1[4]&&node.getY()>Y1[4]) { // 4사분면
-						
+					else if(node.getX() > X1[4] && node.getY() < Y1[4]) {
 						
 					}
-					
-					else if(node.getX()>X1[4]&&node.getY()<Y1[4]) { // 1사분면
-	
-	
-					}
-					
-					
 					break;
 				case 2 :
-						k = 3;
-						l = 5;
-					
-					
+					k = 3;
+					l = 5;
 					break;
 				case 3 :
 					k = 5;
 					l = 5;
-					
-					
 					break;
 				case 4 :
 					k = 5;
 					l = 3;
-					
-					
 					break;
-				case 5 : 
+				case 5:
 					k = 4;
 					l = 2;
-					
-					
 					break;
 				case 6 :
 					k = 4;
 					l = 6;
-					
-					
 					break;
 				default :
 					break;
-					
+				
 				}
 			}
 			
-			node.setX(X1[k-1]);
-			node.setY(Y1[l-1]);
+			node.setX(X1[k - 1]);
+			node.setY(Y1[l - 1]);
 			node.setWidth(60);
 			node.setHeight(50);
 			node.setColor(labelColor[node.getlevel()%5].getRGB());
-			
-			//final x = quadBezier(node.getX(), node.getParent().getX(), posC.x, 1000);
-		    //final y = quadBezier(node.getY(), node.getParent().getY(), posC.y, 1000);
+			String ColorR = Integer.toHexString(labelColor[node.getlevel()%5].getRed());
+			String ColorG = Integer.toHexString(labelColor[node.getlevel()%5].getGreen());
+			String ColorB = Integer.toHexString(labelColor[node.getlevel()%5].getBlue());
+			String ColorRGB = ColorR + ColorG + ColorB;
+			node.setHexColor(ColorRGB);
 			
 			la.setSize(node.getWidth(), node.getHeight());
 			la.setBackground(new Color(node.getColor()));
 			la.setLocation(node.getX(), node.getY());
-			if((node.getX()<X1[4]&&node.getY()<Y1[4]) || (node.getX()>X1[4]&&node.getY()<Y1[4])){
-				
+			
+			if((node.getX() < X1[4] && node.getY() < Y1[4]) || (node.getX() > X1[4] && node.getY() < Y1[4])) {
 				
 			}
-			else if((node.getX()<X1[4]&&node.getY()>Y1[4]) || (node.getX()>X1[4]&&node.getY()>Y1[4])) {
-			
+			else if((node.getX() < X1[4] && node.getY() > Y1[4]) || (node.getX() > X1[4] && node.getY() > Y1[4])) {
+				
+			}
 			la.setVisible(true);
 			la.setOpaque(true);
-			}
-		
+	
+			
+			
 		}
 		return la;
 	}
+	
 	public JLabel openLabel(TreeData node) {
 		
 		JLabel lb = new JLabel(node.getData());
 			
-		//lb.setText(node.getData());
+		lb.setText(node.getData());
 		lb.setSize(node.getWidth(), node.getHeight());
 		lb.setLocation(node.getX(), node.getY());
 		lb.setBackground(new Color(node.getColor()));
 		lb.setVisible(true);
 		lb.setOpaque(true);
-	
-		
-		
+
 		return lb; 
 	}
 	void print(TreeData node) {
@@ -340,24 +290,22 @@ public class TreeStructure {
 		System.out.println("Height : " + node.getHeight());
 		System.out.println("level : " + node.getlevel());
 		System.out.println("Color : " + node.getColor());
-		System.out.println("OrderNum : " + node.getOrderNum());
+		System.out.println("OrderLevel : " + node.getOrderNum());
 		System.out.println("k : " + k + " , l : " + l);
 		System.out.println();
 	}
-	public TreeData[] getTreeData() {
-		return treeData;
-	}
-
 	public double quadBezier(int A, int B, int C, int t) {
-		if (t == 0) {
+		if(t == 0) {
 			return A;
-			}
-		else if (t == 1) {
-		    return C;
-		    }
-
+		}
+		else if(t == 1) {
+			return C;
+		}
 		final int s = 1 - t;
 		
 		return Math.pow(s, 2) * A + 2 * (s * t) * B + Math.pow(t, 2) * C;
+	}
+	public TreeData[] getTreeData() {
+		return treeData;
 	}
 }

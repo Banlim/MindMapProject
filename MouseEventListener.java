@@ -48,7 +48,11 @@ public class MouseEventListener extends NodeLocation implements MouseListener {
 		YValue.setText(String.valueOf(la.getY())); // 마우스 클릭 좌표 y
 		WidthValue.setText(String.valueOf(la.getWidth()));
 		HeightValue.setText(String.valueOf(la.getHeight()));
-		ColorValue.setText(String.valueOf(la.getBackground()));
+		String hexColorR = Integer.toHexString(la.getBackground().getRed());
+		String hexColorG = Integer.toHexString(la.getBackground().getGreen());
+		String hexColorB = Integer.toHexString(la.getBackground().getBlue());
+		String hexColor = "0x" + hexColorR + hexColorG + hexColorB;
+		ColorValue.setText(String.valueOf(hexColor));
 		
 	}
 	@Override
