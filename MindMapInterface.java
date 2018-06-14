@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 
@@ -26,12 +27,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
 
-
+import userInterface.ButtonEventListener;
 
 
 
 public class MindMapInterface extends JFrame{
+	
 	private ImageIcon newToolImage = new ImageIcon("ToolBarIcon\\newIcon.jpg");
 	private ImageIcon openToolImage = new ImageIcon("ToolBarIcon\\openIcon.jpg");
 	private ImageIcon saveToolImage = new ImageIcon("ToolBarIcon\\saveIcon.jpg");
@@ -39,7 +42,6 @@ public class MindMapInterface extends JFrame{
 	private ImageIcon applyToolImage = new ImageIcon("ToolBarIcon\\applyIcon.jpg");
 	private ImageIcon changeToolImage = new ImageIcon("ToolBarIcon\\changeIcon.jpg");
 	private ImageIcon CloseToolImage = new ImageIcon("ToolBarIcon\\CloseToolIcon.jpg");
-	
 	
 	private Image newImage = newToolImage.getImage();
 	private Image openImage = openToolImage.getImage();
@@ -49,7 +51,7 @@ public class MindMapInterface extends JFrame{
 	private Image changeImage = changeToolImage.getImage();
 	private Image closeImage = CloseToolImage.getImage();
 	
-	
+	private Icon icon;
 	
 	
 	
@@ -64,7 +66,7 @@ public class MindMapInterface extends JFrame{
 	protected JPanel MindMapPane = new JPanel(null);
 	protected JPanel AttributePane = new JPanel(new BorderLayout());
 
-	
+	private MouseEventListener ChangeMouseListener = new MouseEventListener(MouseEventListener.NameValue,MouseEventListener.XValue,MouseEventListener.YValue,MouseEventListener.WidthValue,MouseEventListener.HeightValue,MouseEventListener.ColorValue);
 	private ButtonEventListener ApplyListener = new ButtonEventListener(MindMapPane, TextArea, applyImage);
 	private ButtonEventListener newFileListener = new ButtonEventListener(MindMapPane, TextArea, newImage);
 	private ButtonEventListener SaveListener = new ButtonEventListener(MindMapPane, TextArea, saveImage);
@@ -77,16 +79,22 @@ public class MindMapInterface extends JFrame{
 	private JSplitPane jsp2;
 	private JSplitPane jsp1;
 	
+
+	
 	public MindMapInterface() {
+		setUIFont(new javax.swing.plaf.FontUIResource("휴먼편지체", Font.BOLD, 20));
+		UIManager.put("Menu.font", new Font("휴먼편지체", Font.BOLD, 20));
+		UIManager.put("MenuItem.font", new Font("휴먼편지체", Font.BOLD, 18));
+		UIManager.put("Label.font", new Font("휴먼편지체", Font.BOLD, 15));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(LayoutWidth, LayoutHeight);
-		setTitle("MindMap - Application");
 		contentPane = getContentPane();
 		createMenu();
 		createTool();
 		SetTextEditorPane();
 		MindMapPane();
 		SetAttributePane();
+		
 		
 		
 		jsp2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, TextEditorPane, MindMapPane);
@@ -108,7 +116,6 @@ public class MindMapInterface extends JFrame{
 		JMenuItem [] fileItem = new JMenuItem[3];
 		JMenuItem [] editItem = new JMenuItem[2];
 		JMenuItem [] saveItem = new JMenuItem[2];
-		
 		String[] fileItemTitle = {"새로 만들기", "열기", "닫기"};
 		String[] editItemTitle = {"적용", "변경"};
 		String[] saveItemTitle = {"저장", "다른 이름으로 저장"};
@@ -136,7 +143,7 @@ public class MindMapInterface extends JFrame{
 		
 		fileItem[0].addActionListener(newFileListener); // 새로 만들기
 		fileItem[1].addActionListener(openFileListener); // 열기
-		fileItem[2].addActionListener(CloseListener);
+		fileItem[2].addActionListener(CloseListener); // 닫기
 		editItem[0].addActionListener(ApplyListener); // 적용
 		editItem[1].addActionListener(ChangeListener); // 변경
 		saveItem[0].addActionListener(SaveListener); // 저장
@@ -146,7 +153,7 @@ public class MindMapInterface extends JFrame{
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		menuBar.add(saveMenu);
-		
+
 		
 				
 		this.setJMenuBar(menuBar);
@@ -234,10 +241,6 @@ public class MindMapInterface extends JFrame{
 		
 		
 		
-		
-		
-		
-		
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		
 		
@@ -245,9 +248,10 @@ public class MindMapInterface extends JFrame{
 	}
 	
 	public void SetAttributePane() {
-		
+
 		JLabel name=new JLabel("Attribute Pane");
 		AttributePane.add(name, BorderLayout.NORTH);
+		name.setFont(new Font("휴먼편지체", Font.BOLD, 25));
 		
 		JPanel middlePanel= new JPanel();
 		GridLayout grd = new GridLayout(6,2);
@@ -257,40 +261,40 @@ public class MindMapInterface extends JFrame{
 		
 		JLabel NameNode=new JLabel("	TEXT:");
 		middlePanel.add(NameNode);
-		JTextField NameValue= new JTextField();
-		NameValue.setEditable(false);
-		middlePanel.add(NameValue);
-		NameValue.setSize(60, 20);
+		ChangeMouseListener.NameValue= new JTextField();
+		ChangeMouseListener.NameValue.setEditable(false);
+		middlePanel.add(ChangeMouseListener.NameValue);
+		ChangeMouseListener.NameValue.setSize(60, 20);
 		
 		JLabel XNode=new JLabel("	X:");
 		middlePanel.add(XNode);
-		JTextField XValue= new JTextField();
-		middlePanel.add(XValue);
-		XValue.setSize(60, 20);
+		ChangeMouseListener.XValue= new JTextField();
+		middlePanel.add(ChangeMouseListener.XValue);
+		ChangeMouseListener.XValue.setSize(60, 20);
 		
-		JLabel YNode=new JLabel(	"Y:");
+		JLabel YNode=new JLabel("	Y:");
 		middlePanel.add(YNode);
-		JTextField YValue= new JTextField();
-		middlePanel.add(YValue);
-		YValue.setSize(60, 20);
+		ChangeMouseListener. YValue= new JTextField();
+		middlePanel.add(ChangeMouseListener.YValue);
+		ChangeMouseListener.YValue.setSize(60, 20);
 		
 		JLabel WidthNode=new JLabel("	W:");
 		middlePanel.add(WidthNode);
-		JTextField WidthValue= new JTextField();
-		middlePanel.add(WidthValue);
-		WidthValue.setSize(60, 20);
+		ChangeMouseListener. WidthValue= new JTextField();
+		middlePanel.add(ChangeMouseListener.WidthValue);
+		ChangeMouseListener.WidthValue.setSize(60, 20);
 		
 		JLabel HeightNode=new JLabel("	H:");
 		middlePanel.add(HeightNode);
-		JTextField HeightValue= new JTextField();
-		middlePanel.add(HeightValue);
-		HeightValue.setSize(60, 20);
+		ChangeMouseListener. HeightValue= new JTextField();
+		middlePanel.add(ChangeMouseListener.HeightValue);
+		ChangeMouseListener.HeightValue.setSize(60, 20);
 		
 		JLabel ColorNode=new JLabel("	Color:");
 		middlePanel.add(ColorNode);
-		JTextField ColorValue= new JTextField();
-		middlePanel.add(ColorValue);
-		ColorValue.setSize(60, 20);
+		ChangeMouseListener. ColorValue= new JTextField();
+		middlePanel.add(ChangeMouseListener.ColorValue);
+		ChangeMouseListener.ColorValue.setSize(60, 20);
 		
 		AttributePane.add(middlePanel, BorderLayout.CENTER);
 		JButton ChangeNode=new JButton("변경");
@@ -304,30 +308,48 @@ public class MindMapInterface extends JFrame{
 	
 	public void SetTextEditorPane() {
 		JLabel name= new JLabel("Text Editor Pane");
+		name.setFont(new Font("휴먼편지체", Font.BOLD, 25));
 		TextEditorPane.add(name, BorderLayout.NORTH);
 		JButton ApplyButton= new JButton("적용");
 		ApplyButton.setName("apply");
 		TextEditorPane.add(ApplyButton, BorderLayout.SOUTH);
 		JScrollPane TextScrollPane= new JScrollPane(TextArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		TextEditorPane.add(TextScrollPane);
-		TextArea.setTabSize(3);
+		TextArea.setTabSize(2);
 		ApplyButton.addActionListener(ApplyListener);
 		contentPane.add(TextEditorPane);
+		TextArea.setFont(new Font("휴먼편지체", Font.PLAIN, 20));
+
+
 	}
 	
 	public void MindMapPane(){
 		JScrollPane MapScrollPane= new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		JLabel name=new JLabel("Mind Map Pane");
-		name.setLocation(MindMapPane.getX(), MindMapPane.getY());
+		name.setLocation(200,200);
 		MindMapPane.add(name);
 		MapScrollPane.add(MindMapPane);
 		MindMapPane.setPreferredSize(new Dimension(600, 600));
 		contentPane.add(MapScrollPane);
-	
+
 	}
 
+
+	public static void setUIFont(javax.swing.plaf.FontUIResource f) {
+		java.util.Enumeration keys = UIManager.getDefaults().keys();
+		while (keys.hasMoreElements()) {
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof javax.swing.plaf.FontUIResource) {
+				UIManager.put(key, f); 
+				}
+			}
+		}
+	
+	
 	public static void main(String[] args) {
 		new MindMapInterface();
 	}
 
 }
+
