@@ -58,6 +58,17 @@ public class MouseEventListener extends NodeLocation implements MouseListener,Mo
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		la =(JLabel)e.getSource();
+		NameValue.setText(la.getText().replaceAll("\t",""));
+		XValue.setText(String.valueOf(la.getX())); // 마우스 클릭 좌표 x
+		YValue.setText(String.valueOf(la.getY())); // 마우스 클릭 좌표 y
+		WidthValue.setText(String.valueOf(la.getWidth()));
+		HeightValue.setText(String.valueOf(la.getHeight()));
+		String hexColorR = Integer.toHexString(la.getBackground().getRed());
+		String hexColorG = Integer.toHexString(la.getBackground().getGreen());
+		String hexColorB = Integer.toHexString(la.getBackground().getBlue());
+		String hexColor = "0x" + hexColorR + hexColorG + hexColorB;
+		ColorValue.setText(String.valueOf(hexColor));
+		
 		if(clicknum==0) {
 			tempclickedLabel.setText(la.getText());
 			tempclickedLabel.setBackground(la.getBackground());
@@ -93,8 +104,11 @@ public class MouseEventListener extends NodeLocation implements MouseListener,Mo
 		YValue.setText(String.valueOf(la.getY())); // 마우스 클릭 좌표 y
 		WidthValue.setText(String.valueOf(la.getWidth()));
 		HeightValue.setText(String.valueOf(la.getHeight()));
-		ColorValue.setText(String.valueOf(la.getBackground()));
-		
+		String hexColorR = Integer.toHexString(la.getBackground().getRed());
+		String hexColorG = Integer.toHexString(la.getBackground().getGreen());
+		String hexColorB = Integer.toHexString(la.getBackground().getBlue());
+		String hexColor = "0x" + hexColorR + hexColorG + hexColorB;
+		ColorValue.setText(String.valueOf(hexColor));
 
 	}
 	@Override
@@ -107,7 +121,11 @@ public class MouseEventListener extends NodeLocation implements MouseListener,Mo
 		YValue.setText(String.valueOf(la.getY())); // 마우스 클릭 좌표 y
 		WidthValue.setText(String.valueOf(la.getWidth()));
 		HeightValue.setText(String.valueOf(la.getHeight()));
-		ColorValue.setText(String.valueOf(la.getBackground()));
+		String hexColorR = Integer.toHexString(la.getBackground().getRed());
+		String hexColorG = Integer.toHexString(la.getBackground().getGreen());
+		String hexColorB = Integer.toHexString(la.getBackground().getBlue());
+		String hexColor = "0x" + hexColorR + hexColorG + hexColorB;
+		ColorValue.setText(String.valueOf(hexColor));
 		MindMapPane.repaint();
 	}
 	
@@ -128,8 +146,11 @@ public class MouseEventListener extends NodeLocation implements MouseListener,Mo
 		XValue.setText(String.valueOf(la.getX())); // 마우스 클릭 좌표 x
 		YValue.setText(String.valueOf(la.getY())); // 마우스 클릭 좌표 y
 		WidthValue.setText(String.valueOf(la.getWidth()));
-		HeightValue.setText(String.valueOf(la.getHeight()));
-		ColorValue.setText(String.valueOf(la.getBackground()));
+		HeightValue.setText(String.valueOf(la.getHeight()));String hexColorR = Integer.toHexString(la.getBackground().getRed());
+		String hexColorG = Integer.toHexString(la.getBackground().getGreen());
+		String hexColorB = Integer.toHexString(la.getBackground().getBlue());
+		String hexColor = "0x" + hexColorR + hexColorG + hexColorB;
+		ColorValue.setText(String.valueOf(hexColor));
 		MindMapPane.repaint();
 	}
 	@Override
@@ -153,8 +174,5 @@ public class MouseEventListener extends NodeLocation implements MouseListener,Mo
                       new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
     }
 
-	public void labelRect(){
-		
-	}
 
 }

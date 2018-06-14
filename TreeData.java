@@ -1,32 +1,30 @@
 package userInterface;
 
-import userInterface.TreeData;
+import javax.swing.JFrame;
 
-public abstract class TreeData {
-	private TreeData[] child = new TreeData[10];
+public abstract class TreeData extends JFrame {
+	private TreeData[] child=new TreeData[10];
 	private TreeData parent;
 	private TreeData sibling;
 	private int level;
-	//private int orderLevel; // 현재 레벨이 몇 번째로 나왔는지?
-	private int childNum;
-	private int orderNum;
+	private int childNum; //자식 노드의 개수
+	private int orderNum; // 자신의 부모 아래에서 현재 레벨(sibling과 자신)이 몇 번째로 나왔는지(1번째부터 시작)
+	private boolean isDragged;
 	protected String data;
 	TreeData next;
 	
-	abstract int getX();
+	
+	public abstract int getX();
 	abstract void setX(int x);
-	abstract int getY();
+	public abstract int getY();
 	abstract void setY(int y);
-	abstract int getWidth();
+	public abstract int getWidth();
 	abstract void setWidth(int width);
-	abstract int getHeight();
+	public abstract int getHeight();
 	abstract void setHeight(int height);
 	abstract int getColor();
 	abstract void setColor(int color);
 	abstract String HexColor(int color);
-	abstract int decColor(String hexColor);
-	abstract String getHexColor();
-	abstract void setHexColor(String Color);
 	
 	public TreeData() {
 		this.data = null;
@@ -37,8 +35,9 @@ public abstract class TreeData {
 		this.childNum = 0;
 		this.orderNum = 0;
 		this.next = null;
+		this.isDragged=false;
 	}
-	public void setChild(TreeData newData, int i) {
+	public void setChild(TreeData newData,int i) {
 		this.child[i] = newData;
 	}
 	public TreeData getChild(int i) {
@@ -62,12 +61,6 @@ public abstract class TreeData {
 	public int getlevel() {
 		return level;
 	}
-	public void setData(String newData) {
-		this.data = newData;
-	}
-	public String getData() {
-		return data;
-	}
 	public void setChildNum(int childNum) {
 		this.childNum = childNum;
 	}
@@ -79,6 +72,12 @@ public abstract class TreeData {
 	}
 	public int getOrderNum() {
 		return orderNum;
+	}
+	public void setData(String newData) {
+		this.data = newData;
+	}
+	public String getData() {
+		return data;
 	}
 	
 }
