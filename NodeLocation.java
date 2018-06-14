@@ -4,7 +4,7 @@ import userInterface.TreeData;
 
 //import java.awt.Color;
 
-class NodeLocation extends TreeData { // 한 노드에 대한 정보 클래스
+public class NodeLocation extends TreeData { // 한 노드에 대한 정보 클래스
 	private int x;
 	private int y;
 	private int width;
@@ -19,6 +19,7 @@ class NodeLocation extends TreeData { // 한 노드에 대한 정보 클래스
 		this.width = 0;
 		this.height = 0;
 		this.color = 0;
+		this.hexColorRGB = null;
 	}
 	
 	public int getX() {

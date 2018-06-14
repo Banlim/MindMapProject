@@ -74,7 +74,7 @@ public class ButtonEventListener implements ActionListener {
 		this.command( btn);
 	}
 	
-	private void command( String btn) {
+	private void command(String btn) {
 		
 
 		int k = 0;
@@ -214,6 +214,17 @@ public class ButtonEventListener implements ActionListener {
 				}
 								
 			}
+			else if(btn.equals("help")) {
+				String VersionInfor = "버전 정보\n	1.1.1\n";
+				String UpdateInfor = "최근 업데이트 날짜\n 2018.06.14\n";
+				String DownCount = "다운로드 횟수 \n 10,000회 이상\n";
+				String Development = "개발자\n 20170328 정상아 \n 20170340 최하영\n";
+				String Thanks = "감사합니다.";
+				
+				JOptionPane.showMessageDialog(null, VersionInfor + UpdateInfor + DownCount + Development + Thanks, "Information",JOptionPane.INFORMATION_MESSAGE);
+				
+				}
+			
 		}
 	}
 				

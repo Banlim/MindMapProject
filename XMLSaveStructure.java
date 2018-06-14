@@ -52,6 +52,9 @@ public class XMLSaveStructure  {
 			org.w3c.dom.Document doc = docBuilder.newDocument();
 			System.out.println("РќДо!");
 			System.out.println(treeData[0].getX());
+			System.out.println(treeData[0].getColor());
+			System.out.println(treeData[0].HexColor(treeData[0].getColor()));
+			System.out.println(treeData[0].decColor(treeData[0].HexColor(treeData[0].getColor())));
 		
 			Element NodeElement = doc.createElement("Node");
 			doc.appendChild(NodeElement);
@@ -84,7 +87,7 @@ public class XMLSaveStructure  {
 				DataElement.appendChild(HeightElement);
 				
 				Element ColorElement = doc.createElement("Color");
-				ColorElement.appendChild(doc.createTextNode("" + treeData[i].getHeight()));
+				ColorElement.appendChild(doc.createTextNode("" + treeData[i].getColor()));
 				DataElement.appendChild(ColorElement);
 				
 				Element LevelElement = doc.createElement("Level");
